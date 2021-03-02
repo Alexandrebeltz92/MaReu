@@ -45,6 +45,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         holder.mDeleteMeeting.setOnClickListener(v -> {
             listener.OnItemClicked(mMeeting.get(position));
         });
+        setRoomColor(holder,position);
     }
 
     @Override
