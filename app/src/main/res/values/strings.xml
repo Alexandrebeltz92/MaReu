@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Ma Réu</string>
+    <string name="content_description_filter">Filter description</string>
+    <string name="filter">Filter</string>
+    <string name="avatar_meeting">Avatar Meeting</string>
+    <string name="delete_button">Delete Button</string>
+    <string name="subject_meeting">Meeting Subject</string>
+    <string name="date_meeting">Meeting Date</string>
+    <string name="localisation_meeting">Meeting Localisation</string>
+    <string name="participants_meeting">Meeting Participants</string>
+    <string name="localisation">Localisation</string>
+    <string name="content_description_localisation"> Description localisation</string>
+    <string name="content_description_date"> Description date</string>
+    <string name="date"> Date</string>
+    <string name="localisation_filter"> Localisation </string>
+    <string name="date_filter"> Date </string>
+</resources>
