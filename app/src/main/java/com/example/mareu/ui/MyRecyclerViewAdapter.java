@@ -15,7 +15,6 @@ import com.example.mareu.R;
 import com.example.mareu.model.Meeting;
 
 import java.text.DateFormat;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -43,8 +42,6 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         holder.mLocalisation.setText(meeting.getLocalisation());
         String[] mDate = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT, Locale.FRANCE).format(meeting.getDate()).split(" ");
         holder.mDate.setText(mDate[mDate.length - 1]);
-        setRoomColor(holder, position);
-
         holder.mDeleteMeeting.setOnClickListener(v -> {
             listener.OnItemClicked(mMeeting.get(position));
         });
