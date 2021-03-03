@@ -20,7 +20,7 @@
             android:layout_height="?attr/actionBarSize"
             android:background="@color/toolbar"
             app:layout_scrollFlags="scroll|enterAlways"
-            app:menu="@menu/top_app_bar"
+            app:menu="@menu/filter_menu"
             app:title="@string/app_name"
             app:titleTextColor="@color/white">
 

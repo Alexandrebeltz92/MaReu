@@ -1,21 +1,22 @@
 package com.example.mareu.ui;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.Dialog;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
+import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.example.mareu.R;
 import com.example.mareu.di.DI;
@@ -29,8 +30,13 @@ public class MeetingListActivity extends AppCompatActivity {
     RecyclerView mRecyclerView;
     FloatingActionButton mFab;
     MeetingApiService meetingApiService;
-    Button mLocalisationButton;
-    Dialog mDialogLocalisation;
+
+    //Filter localisation
+    private AlertDialog.Builder mDialogBuilder;
+    private AlertDialog mDialog;
+    private CheckBox mZeusRoom, mHadesRoom, mApolloRoom, mPoseidonRoom, mHermesRoom;
+    private ImageButton mClosePopup;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,20 +79,49 @@ public class MeetingListActivity extends AppCompatActivity {
                 Snackbar.make(v, "Réunion ajoutée :" + meetingApiService.getMeeting().size(), Snackbar.LENGTH_LONG).show();
             }
         });
-
-        mLocalisationButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mDialogLocalisation.setContentView(R.layout.popup_localisation);
-            }
-        });
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         //Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.top_app_bar, menu);
-        MenuItem item = menu.findItem(R.id.filter);
+        getMenuInflater().inflate(R.menu.filter_menu, menu);
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        int id = item.getItemId();
+
+        if (id == R.id.localisation_filter) {
+            filterRoomDialog();
+            Toast.makeText(getApplicationContext(), "Choose your rooms.", Toast.LENGTH_LONG).show();
+        }
+        if (id == R.id.date_filter){
+            Toast.makeText(getApplicationContext(),"Date Filter", Toast.LENGTH_LONG).show();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    public void filterRoomDialog(){
+        mDialogBuilder = new AlertDialog.Builder(this);
+        final View filterRoomPopupView = getLayoutInflater().inflate(R.layout.popup_localisation, null);
+        mZeusRoom = (CheckBox) filterRoomPopupView.findViewById(R.id.zeus_room_checkbox);
+        mHadesRoom = (CheckBox) filterRoomPopupView.findViewById(R.id.hades_room_checkbox);
+        mApolloRoom = (CheckBox) filterRoomPopupView.findViewById(R.id.apollo_room_checkbox);
+        mPoseidonRoom = (CheckBox) filterRoomPopupView.findViewById(R.id.poseidon_room_checkbox);
+        mHermesRoom = (CheckBox) filterRoomPopupView.findViewById(R.id.hermes_room_checkbox);
+        mClosePopup = (ImageButton) filterRoomPopupView.findViewById(R.id.close_popup_button);
+
+        mDialogBuilder.setView(filterRoomPopupView);
+        mDialog = mDialogBuilder.create();
+        mDialog.show();
+
+        mClosePopup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDialog.dismiss();
+            }
+        });
     }
 }

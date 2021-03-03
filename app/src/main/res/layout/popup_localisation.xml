@@ -10,6 +10,15 @@
     android:layout_gravity="center"
     android:padding="5dp">
 
+    <ImageButton
+        android:id="@+id/close_popup_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_baseline_close_24"
+        android:background="@null"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -19,6 +28,15 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/localisation_popup_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/localisation_popup"
+            android:gravity="center_horizontal"
+            android:textStyle="bold"
+            />
 
         <CheckBox
             android:id="@+id/zeus_room_checkbox"
