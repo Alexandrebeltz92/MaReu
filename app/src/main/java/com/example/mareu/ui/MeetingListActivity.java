@@ -8,6 +8,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,6 +17,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.mareu.R;
@@ -31,11 +33,18 @@ public class MeetingListActivity extends AppCompatActivity {
     FloatingActionButton mFab;
     MeetingApiService meetingApiService;
 
-    //Filter localisation
     private AlertDialog.Builder mDialogBuilder;
     private AlertDialog mDialog;
+
+    //Filter localisation
+
     private CheckBox mZeusRoom, mHadesRoom, mApolloRoom, mPoseidonRoom, mHermesRoom;
     private ImageButton mClosePopup;
+
+    //Filter date
+
+    private ImageButton mClosePopupDate;
+    private TimePicker mTimePicker;
 
 
     @Override
@@ -97,13 +106,14 @@ public class MeetingListActivity extends AppCompatActivity {
             filterRoomDialog();
             Toast.makeText(getApplicationContext(), "Choose your rooms.", Toast.LENGTH_LONG).show();
         }
-        if (id == R.id.date_filter){
-            Toast.makeText(getApplicationContext(),"Date Filter", Toast.LENGTH_LONG).show();
+        if (id == R.id.date_filter) {
+            filterDateDialog();
+            Toast.makeText(getApplicationContext(), "Date Filter", Toast.LENGTH_LONG).show();
         }
         return super.onOptionsItemSelected(item);
     }
 
-    public void filterRoomDialog(){
+    public void filterRoomDialog() {
         mDialogBuilder = new AlertDialog.Builder(this);
         final View filterRoomPopupView = getLayoutInflater().inflate(R.layout.popup_localisation, null);
         mZeusRoom = (CheckBox) filterRoomPopupView.findViewById(R.id.zeus_room_checkbox);
@@ -123,5 +133,12 @@ public class MeetingListActivity extends AppCompatActivity {
                 mDialog.dismiss();
             }
         });
+    }
+
+    public void filterDateDialog() {
+        mDialogBuilder = new AlertDialog.Builder(this);
+        final View filterDatePopupView = getLayoutInflater().inflate(R.layout.popup_date, null);
+        mTimePicker = (TimePicker) filterDatePopupView.findViewById(R.id.time_meeting_filter);
+        mClosePopupDate = (ImageButton) filterDatePopupView.findViewById(R.id.close_popup_button_date);
     }
 }

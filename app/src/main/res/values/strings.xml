@@ -15,4 +15,5 @@
     <string name="localisation_filter"> Localisation </string>
     <string name="date_filter"> Date </string>
     <string name="localisation_popup">Selectionner vos salles</string>
+    <string name="date_popup">Selectionner votre horaire</string>
 </resources>

@@ -6,7 +6,7 @@
     android:layout_width="350dp"
     android:layout_height="350dp"
     android:orientation="vertical"
-    android:background="@color/HermesRoom"
+    android:background="@color/popup_background"
     android:layout_gravity="center"
     android:padding="5dp">
 
@@ -33,6 +33,8 @@
             android:id="@+id/localisation_popup_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="15dp"
             android:text="@string/localisation_popup"
             android:gravity="center_horizontal"
             android:textStyle="bold"
