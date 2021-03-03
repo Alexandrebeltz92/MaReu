@@ -6,12 +6,16 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 
 import com.example.mareu.R;
 import com.example.mareu.di.DI;
@@ -25,6 +29,8 @@ public class MeetingListActivity extends AppCompatActivity {
     RecyclerView mRecyclerView;
     FloatingActionButton mFab;
     MeetingApiService meetingApiService;
+    Button mLocalisationButton;
+    Dialog mDialogLocalisation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,15 +73,20 @@ public class MeetingListActivity extends AppCompatActivity {
                 Snackbar.make(v, "Réunion ajoutée :" + meetingApiService.getMeeting().size(), Snackbar.LENGTH_LONG).show();
             }
         });
+
+        mLocalisationButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDialogLocalisation.setContentView(R.layout.popup_localisation);
+            }
+        });
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         //Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.top_app_bar, menu);
-
         MenuItem item = menu.findItem(R.id.filter);
         return true;
     }
-
 }
