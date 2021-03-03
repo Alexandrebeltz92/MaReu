@@ -140,5 +140,16 @@ public class MeetingListActivity extends AppCompatActivity {
         final View filterDatePopupView = getLayoutInflater().inflate(R.layout.popup_date, null);
         mTimePicker = (TimePicker) filterDatePopupView.findViewById(R.id.time_meeting_filter);
         mClosePopupDate = (ImageButton) filterDatePopupView.findViewById(R.id.close_popup_button_date);
+
+        mDialogBuilder.setView(filterDatePopupView);
+        mDialog = mDialogBuilder.create();
+        mDialog.show();
+
+        mClosePopupDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDialog.dismiss();
+            }
+        });
     }
 }
