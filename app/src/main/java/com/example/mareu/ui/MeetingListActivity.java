@@ -27,6 +27,9 @@ import com.example.mareu.service.MeetingApiService;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MeetingListActivity extends AppCompatActivity {
 
     RecyclerView mRecyclerView;
@@ -36,12 +39,12 @@ public class MeetingListActivity extends AppCompatActivity {
     private AlertDialog.Builder mDialogBuilder;
     private AlertDialog mDialog;
 
-    //Filter localisation
+    //Filter localisation room meeting
 
     private CheckBox mZeusRoom, mHadesRoom, mApolloRoom, mPoseidonRoom, mHermesRoom;
     private ImageButton mClosePopup;
 
-    //Filter date
+    //Filter date meeting
 
     private ImageButton mClosePopupDate;
     private TimePicker mTimePicker;
