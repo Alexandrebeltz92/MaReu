@@ -35,6 +35,7 @@ public class MeetingListActivity extends AppCompatActivity {
     RecyclerView mRecyclerView;
     FloatingActionButton mFab;
     MeetingApiService meetingApiService;
+    private List<String> Participants;
 
     private AlertDialog.Builder mDialogBuilder;
     private AlertDialog mDialog;
