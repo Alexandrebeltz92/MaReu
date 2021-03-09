@@ -8,7 +8,10 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.app.TimePickerDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,6 +19,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.CheckBox;
+import android.widget.DatePicker;
 import android.widget.ImageButton;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -28,27 +32,14 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Calendar;
+import java.util.Date;
 
 public class MeetingListActivity extends AppCompatActivity {
 
     RecyclerView mRecyclerView;
     FloatingActionButton mFab;
     MeetingApiService meetingApiService;
-    private List<String> Participants;
-
-    private AlertDialog.Builder mDialogBuilder;
-    private AlertDialog mDialog;
-
-    //Filter localisation room meeting
-
-    private CheckBox mZeusRoom, mHadesRoom, mApolloRoom, mPoseidonRoom, mHermesRoom;
-    private ImageButton mClosePopup;
-
-    //Filter date meeting
-
-    private ImageButton mClosePopupDate;
-    private TimePicker mTimePicker;
 
 
     @Override
@@ -114,46 +105,67 @@ public class MeetingListActivity extends AppCompatActivity {
             filterDateDialog();
             Toast.makeText(getApplicationContext(), "Date Filter", Toast.LENGTH_LONG).show();
         }
+
+        if (id == R.id.all_filter) {
+            ((MyRecyclerViewAdapter) mRecyclerView.getAdapter()).filterDate(null);
+            Toast.makeText(getApplicationContext(), "afficher Tous", Toast.LENGTH_LONG).show();
+        }
+
         return super.onOptionsItemSelected(item);
     }
 
     public void filterRoomDialog() {
-        mDialogBuilder = new AlertDialog.Builder(this);
-        final View filterRoomPopupView = getLayoutInflater().inflate(R.layout.popup_localisation, null);
-        mZeusRoom = (CheckBox) filterRoomPopupView.findViewById(R.id.zeus_room_checkbox);
-        mHadesRoom = (CheckBox) filterRoomPopupView.findViewById(R.id.hades_room_checkbox);
-        mApolloRoom = (CheckBox) filterRoomPopupView.findViewById(R.id.apollo_room_checkbox);
-        mPoseidonRoom = (CheckBox) filterRoomPopupView.findViewById(R.id.poseidon_room_checkbox);
-        mHermesRoom = (CheckBox) filterRoomPopupView.findViewById(R.id.hermes_room_checkbox);
-        mClosePopup = (ImageButton) filterRoomPopupView.findViewById(R.id.close_popup_button);
+        String[] roomsList = {"Zeus Room", "Hades Room", "Hermes Room", "Apollo Room", "Poseidon Room"};
+        boolean[] isCheckedList = {false, false, false, false, false};
 
-        mDialogBuilder.setView(filterRoomPopupView);
-        mDialog = mDialogBuilder.create();
-        mDialog.show();
 
-        mClosePopup.setOnClickListener(new View.OnClickListener() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Select room");
+        builder.setMultiChoiceItems(roomsList, isCheckedList, new DialogInterface.OnMultiChoiceClickListener() {
             @Override
-            public void onClick(View v) {
-                mDialog.dismiss();
+            public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+                isCheckedList[which] = isChecked;
             }
         });
+
+        builder.setPositiveButton("OK" ,new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                ArrayList<String> rooms = new ArrayList<>();
+                for (int i = 0; i < roomsList.length; i++) {
+                    if  (isCheckedList[i]) {
+                        rooms.add(roomsList[i]);
+                    }
+                }
+                ((MyRecyclerViewAdapter) mRecyclerView.getAdapter()).filterRoom(rooms);
+            }
+        });
+        Dialog dialog = builder.create();
+        dialog.show();
     }
 
     public void filterDateDialog() {
-        mDialogBuilder = new AlertDialog.Builder(this);
-        final View filterDatePopupView = getLayoutInflater().inflate(R.layout.popup_date, null);
-        mTimePicker = (TimePicker) filterDatePopupView.findViewById(R.id.time_meeting_filter);
-        mClosePopupDate = (ImageButton) filterDatePopupView.findViewById(R.id.close_popup_button_date);
 
-        mDialogBuilder.setView(filterDatePopupView);
-        mDialog = mDialogBuilder.create();
-        mDialog.show();
+        // calender class's instance and get current date , month and year from calender
+        final Calendar c = Calendar.getInstance();
+        int mYear = c.get(Calendar.YEAR); // current year
+        int mMonth = c.get(Calendar.MONTH); // current month
+        int mDay = c.get(Calendar.DAY_OF_MONTH); // current day
+        // date picker dialog
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this,
+                new DatePickerDialog.OnDateSetListener() {
 
-        mClosePopupDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mDialog.dismiss();
-            }
-        });
+                    @Override
+                    public void onDateSet(DatePicker date, int year,
+                                          int monthOfYear, int dayOfMonth) {
+                        // set day of month , month and year value in the edit text
+                        Calendar calendar = Calendar.getInstance();
+                        calendar.set(year, monthOfYear, dayOfMonth);
+                        ((MyRecyclerViewAdapter) mRecyclerView.getAdapter()).filterDate(calendar.getTime());
+                    }
+                }, mYear, mMonth, mDay);
+        datePickerDialog.show();
     }
+
 }

@@ -1,5 +1,6 @@
 package com.example.mareu.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
 import java.util.Random;
@@ -26,7 +27,7 @@ public class Meeting {
     /**
      * Localisation
      */
-    private String localisation;
+    private MeetingRoom meetingRoom;
 
     /**
      * Date
@@ -36,18 +37,18 @@ public class Meeting {
     /**
      * Participants
      */
-    private String participants;
+    private ArrayList<Employee> participants;
 
     /**
      * Constructor
      */
 
-    public Meeting(long id, String subject, int avatarMeeting, String localisation,
-                   Date date, String participants) {
+    public Meeting(long id, String subject, int avatarMeeting, MeetingRoom meetingRoom,
+                   Date date, ArrayList<Employee> participants) {
         this.id = id;
         this.subject = subject;
         this.avatarMeeting = avatarMeeting;
-        this.localisation = localisation;
+        this.meetingRoom = meetingRoom;
         this.date = date;
         this.participants = participants;
     }
@@ -78,12 +79,12 @@ public class Meeting {
         this.avatarMeeting = avatarMeeting;
     }
 
-    public String getLocalisation() {
-        return localisation;
+    public MeetingRoom getMeetingRoom() {
+        return meetingRoom;
     }
 
-    public void setLocalisation(String localisation) {
-        this.localisation = localisation;
+    public void setMeetingRoom(MeetingRoom meetingRoom) {
+        this.meetingRoom = meetingRoom;
     }
 
     public Date getDate() {
@@ -94,11 +95,11 @@ public class Meeting {
         this.date = date;
     }
 
-    public String getParticipants() {
+    public ArrayList<Employee> getParticipants() {
         return participants;
     }
 
-    public void setParticipants(String participants) {
+    public void setParticipants(ArrayList<Employee> participants) {
         this.participants = participants;
     }
 

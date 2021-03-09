@@ -14,16 +14,21 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.mareu.R;
 import com.example.mareu.model.Meeting;
 
-import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
 public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.MyViewHolder> {
 
     private List<Meeting> mMeeting;
+    private List<Meeting> filterList ;
+    SimpleDateFormat sdf = new SimpleDateFormat("hh:mm", Locale.FRANCE);
 
     public MyRecyclerViewAdapter(List<Meeting> items) {
         mMeeting = items;
+        filterList = items;
     }
 
     @NonNull
@@ -36,53 +41,53 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        Meeting meeting = mMeeting.get(position);
+        Meeting meeting = filterList.get(position);
         holder.mSubject.setText(meeting.getSubject());
         holder.mParticipant.setText(meeting.getParticipants());
-        holder.mLocalisation.setText(meeting.getLocalisation());
-        String[] mDate = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT, Locale.FRANCE).format(meeting.getDate()).split(" ");
-        holder.mDate.setText(mDate[mDate.length - 1]);
+        holder.mLocalisation.setText(meeting.getMeetingRoom());
+        String mDate = sdf.format(meeting.getDate());
+        holder.mDate.setText(mDate);
         holder.mDeleteMeeting.setOnClickListener(v -> {
-            listener.OnItemClicked(mMeeting.get(position));
+            listener.OnItemClicked(filterList.get(position));
         });
     }
 
     @Override
     public int getItemCount() {
-        return mMeeting.size();
+        return filterList.size();
     }
 
     private void setRoomColor(@NonNull MyViewHolder holder, int position) {
         switch (position) {
             case 1:
-                holder.mAvatar.getBackground().setTint(ContextCompat.getColor(holder.itemView.getContext(), R.color.ZeusRoom));
+                holder.mAvatar.getBackground().setTint(ContextCompat.getColor(holder.itemView.getContext(),R.color.ZeusRoom));
                 break;
-            case 2:
-                holder.mAvatar.getBackground().setTint(ContextCompat.getColor(holder.itemView.getContext(), R.color.HadesRoom));
+            case 2 :
+                holder.mAvatar.getBackground().setTint(ContextCompat.getColor(holder.itemView.getContext(),R.color.HadesRoom));
                 break;
             case 3:
-                holder.mAvatar.getBackground().setTint(ContextCompat.getColor(holder.itemView.getContext(), R.color.AresRoom));
+                holder.mAvatar.getBackground().setTint(ContextCompat.getColor(holder.itemView.getContext(),R.color.AresRoom));
                 break;
-            case 4:
-                holder.mAvatar.getBackground().setTint(ContextCompat.getColor(holder.itemView.getContext(), R.color.ApolloRoom));
+            case 4 :
+                holder.mAvatar.getBackground().setTint(ContextCompat.getColor(holder.itemView.getContext(),R.color.ApolloRoom));
                 break;
             case 5:
-                holder.mAvatar.getBackground().setTint(ContextCompat.getColor(holder.itemView.getContext(), R.color.AthenaRoom));
+                holder.mAvatar.getBackground().setTint(ContextCompat.getColor(holder.itemView.getContext(),R.color.AthenaRoom));
                 break;
             case 6:
-                holder.mAvatar.getBackground().setTint(ContextCompat.getColor(holder.itemView.getContext(), R.color.PoseidonRoom));
+                holder.mAvatar.getBackground().setTint(ContextCompat.getColor(holder.itemView.getContext(),R.color.PoseidonRoom));
                 break;
             case 7:
-                holder.mAvatar.getBackground().setTint(ContextCompat.getColor(holder.itemView.getContext(), R.color.HeraRoom));
+                holder.mAvatar.getBackground().setTint(ContextCompat.getColor(holder.itemView.getContext(),R.color.HeraRoom));
                 break;
             case 8:
-                holder.mAvatar.getBackground().setTint(ContextCompat.getColor(holder.itemView.getContext(), R.color.HermesRoom));
+                holder.mAvatar.getBackground().setTint(ContextCompat.getColor(holder.itemView.getContext(),R.color.HermesRoom));
                 break;
             case 9:
-                holder.mAvatar.getBackground().setTint(ContextCompat.getColor(holder.itemView.getContext(), R.color.DionysusRoom));
+                holder.mAvatar.getBackground().setTint(ContextCompat.getColor(holder.itemView.getContext(),R.color.DionysusRoom));
                 break;
             case 10:
-                holder.mAvatar.getBackground().setTint(ContextCompat.getColor(holder.itemView.getContext(), R.color.HeraclesRoom));
+                holder.mAvatar.getBackground().setTint(ContextCompat.getColor(holder.itemView.getContext(),R.color.HeraclesRoom));
                 break;
         }
     }
@@ -103,7 +108,6 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
             mAvatar = itemView.findViewById(R.id.avatar_meeting);
             mDeleteMeeting = itemView.findViewById(R.id.item_list_delete_button);
         }
-
     }
 
     private ItemClickListener listener;
@@ -114,5 +118,38 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
 
     public interface ItemClickListener {
         void OnItemClicked(Meeting meeting);
+    }
+
+    public void filterRoom(ArrayList<String> rooms ) {
+        if (rooms == null || rooms.isEmpty()){
+            filterList = mMeeting;
+        }else {
+            ArrayList<Meeting> resultList = new ArrayList<>();
+            for (String room : rooms) {
+                for (Meeting meeting : mMeeting) {
+                    if (room.equalsIgnoreCase(meeting.getMeetingRoom())) {
+                        resultList.add(meeting);
+                    }
+                }
+                filterList = resultList;
+            }
+        }
+        notifyDataSetChanged();
+    }
+
+    public void filterDate(Date date) {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy", Locale.FRANCE);
+        if (date == null) {
+            filterList = mMeeting;
+        } else {
+            ArrayList<Meeting> resultListDate = new ArrayList<>();
+            for (Meeting meeting : mMeeting) {
+                if (sdf.format(date).equalsIgnoreCase(sdf.format(meeting.getDate()))) {
+                    resultListDate.add(meeting);
+                }
+                filterList = resultListDate;
+            }
+        }
+        notifyDataSetChanged();
     }
 }
