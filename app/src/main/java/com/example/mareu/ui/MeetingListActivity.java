@@ -108,7 +108,7 @@ public class MeetingListActivity extends AppCompatActivity {
 
         if (id == R.id.all_filter) {
             ((MyRecyclerViewAdapter) mRecyclerView.getAdapter()).filterDate(null);
-            Toast.makeText(getApplicationContext(), "afficher Tous", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "afficher tout", Toast.LENGTH_LONG).show();
         }
 
         return super.onOptionsItemSelected(item);
