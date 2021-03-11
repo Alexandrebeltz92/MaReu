@@ -12,6 +12,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mareu.R;
+import com.example.mareu.model.Employee;
 import com.example.mareu.model.Meeting;
 
 import java.text.SimpleDateFormat;
@@ -43,13 +44,22 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         Meeting meeting = filterList.get(position);
         holder.mSubject.setText(meeting.getSubject());
-        holder.mParticipant.setText(meeting.getParticipants());
-        holder.mLocalisation.setText(meeting.getMeetingRoom());
+        holder.mParticipant.setText(addText(meeting.getParticipants()));
+        holder.mLocalisation.setText(meeting.getMeetingRoom().getName());
         String mDate = sdf.format(meeting.getDate());
         holder.mDate.setText(mDate);
         holder.mDeleteMeeting.setOnClickListener(v -> {
             listener.OnItemClicked(filterList.get(position));
         });
+    }
+
+    private String addText(ArrayList<Employee> participants) {
+        StringBuilder text = new StringBuilder();
+        text.append(participants.get(0).getEmail());
+        for (int i=1; i<participants.size(); i++) {
+            text.append(", "+participants.get(i).getEmail());
+        }
+        return text.toString();
     }
 
     @Override
@@ -127,7 +137,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
             ArrayList<Meeting> resultList = new ArrayList<>();
             for (String room : rooms) {
                 for (Meeting meeting : mMeeting) {
-                    if (room.equalsIgnoreCase(meeting.getMeetingRoom())) {
+                    if (room.equalsIgnoreCase(meeting.getMeetingRoom().getName())) {
                         resultList.add(meeting);
                     }
                 }
