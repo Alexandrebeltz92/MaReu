@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.Menu;
@@ -20,6 +21,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -43,10 +45,13 @@ public class MeetingListActivity extends AppCompatActivity {
     FloatingActionButton mFabCreateMeeting;
     MeetingApiService meetingApiService;
 
+    Dialog myDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_meeting_list);
+        myDialog = new Dialog(this);
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
@@ -78,6 +83,7 @@ public class MeetingListActivity extends AppCompatActivity {
             }
         });
 
+        // FLOATING ACTION BUTTON
         mFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -99,8 +105,15 @@ public class MeetingListActivity extends AppCompatActivity {
                  Snackbar.make(v, "Réunion ajoutée :" + meetingApiService.getMeeting().size(), Snackbar.LENGTH_LONG).show();
             }
         });
+
+        mFabCreateMeeting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            }
+        });
     }
 
+    //MENU & MENU OPTIONS
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         //Inflate the menu; this adds items to the action bar if it is present.
@@ -130,6 +143,7 @@ public class MeetingListActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    //FILTER ROOM
     public void filterRoomDialog() {
         String[] roomsList = {"Zeus Room", "Hades Room", "Hermes Room", "Apollo Room", "Poseidon Room"};
         boolean[] isCheckedList = {false, false, false, false, false};
@@ -161,6 +175,7 @@ public class MeetingListActivity extends AppCompatActivity {
         dialog.show();
     }
 
+    //FILTER DATE
     public void filterDateDialog() {
 
         // calender class's instance and get current date , month and year from calender
@@ -183,5 +198,12 @@ public class MeetingListActivity extends AppCompatActivity {
                 }, mYear, mMonth, mDay);
         datePickerDialog.show();
     }
+
+    //CREATE MEETING POPUP
+    public void ShowPopUpCreateMeeeting(View view){
+        myDialog.setContentView(R.layout.popup_create_meeting);
+        myDialog.show();
+    }
+
 
 }

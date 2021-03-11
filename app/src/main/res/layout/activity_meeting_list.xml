@@ -47,6 +47,7 @@
         android:layout_marginBottom="16dp"
         android:clickable="true"
         app:fabSize="mini"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/add_meeting"
         app:layout_constraintEnd_toEndOf="@+id/add_meeting"
         app:srcCompat="@drawable/ic_baseline_group_add_24" />
@@ -58,6 +59,8 @@
         android:layout_marginBottom="16dp"
         android:clickable="true"
         app:fabSize="mini"
+        android:visibility="gone"
+        android:onClick="ShowPopUpCreateMeeeting"
         app:layout_constraintBottom_toTopOf="@+id/add_random_meeting"
         app:layout_constraintEnd_toEndOf="@+id/add_random_meeting"
         app:srcCompat="@drawable/ic_baseline_create_24" />
