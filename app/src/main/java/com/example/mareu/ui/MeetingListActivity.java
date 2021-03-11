@@ -201,7 +201,15 @@ public class MeetingListActivity extends AppCompatActivity {
 
     //CREATE MEETING POPUP
     public void ShowPopUpCreateMeeeting(View view){
+        ImageButton btnclose;
         myDialog.setContentView(R.layout.popup_create_meeting);
+        btnclose = (ImageButton) myDialog.findViewById(R.id.imageButton);
+        btnclose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                myDialog.dismiss();
+            }
+        });
         myDialog.show();
     }
 

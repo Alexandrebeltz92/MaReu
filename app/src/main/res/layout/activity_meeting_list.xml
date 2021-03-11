@@ -48,6 +48,7 @@
         android:clickable="true"
         app:fabSize="mini"
         android:visibility="gone"
+        android:backgroundTint="@color/toolbar"
         app:layout_constraintBottom_toTopOf="@+id/add_meeting"
         app:layout_constraintEnd_toEndOf="@+id/add_meeting"
         app:srcCompat="@drawable/ic_baseline_group_add_24" />
@@ -60,6 +61,7 @@
         android:clickable="true"
         app:fabSize="mini"
         android:visibility="gone"
+        android:backgroundTint="@color/toolbar"
         android:onClick="ShowPopUpCreateMeeeting"
         app:layout_constraintBottom_toTopOf="@+id/add_random_meeting"
         app:layout_constraintEnd_toEndOf="@+id/add_random_meeting"
