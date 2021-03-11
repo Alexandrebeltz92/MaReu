@@ -17,4 +17,5 @@
     <string name="localisation_popup">Selectionner vos salles</string>
     <string name="date_popup">Selectionner votre horaire</string>
     <string name="tous_filter">Tout</string>
+    <string name="add_meeting_button">Add meeting button</string>
 </resources>

@@ -39,8 +39,9 @@ public class MeetingListActivity extends AppCompatActivity {
 
     RecyclerView mRecyclerView;
     FloatingActionButton mFab;
+    FloatingActionButton mFabRandomMeeting;
+    FloatingActionButton mFabCreateMeeting;
     MeetingApiService meetingApiService;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +60,8 @@ public class MeetingListActivity extends AppCompatActivity {
         window.setStatusBarColor(ContextCompat.getColor(this, R.color.toolbar_dark));
 
         mFab = findViewById(R.id.add_meeting);
+        mFabRandomMeeting = findViewById(R.id.add_random_meeting);
+        mFabCreateMeeting = findViewById(R.id.create_meeting);
         mRecyclerView = findViewById(R.id.recycler_view);
         meetingApiService = DI.getMeetingApiService();
 
@@ -78,9 +81,22 @@ public class MeetingListActivity extends AppCompatActivity {
         mFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                meetingApiService.createMeeting(Meeting.random());
-                mRecyclerView.getAdapter().notifyDataSetChanged();
-                Snackbar.make(v, "Réunion ajoutée :" + meetingApiService.getMeeting().size(), Snackbar.LENGTH_LONG).show();
+                if(mFabRandomMeeting.getVisibility() == View.VISIBLE && mFabCreateMeeting.getVisibility() == View.VISIBLE) {
+                    mFabCreateMeeting.setVisibility(View.GONE);
+                    mFabRandomMeeting.setVisibility(View.GONE);
+                } else {
+                    mFabCreateMeeting.setVisibility(View.VISIBLE);
+                    mFabRandomMeeting.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
+        mFabRandomMeeting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                 meetingApiService.createMeeting(Meeting.random());
+                 mRecyclerView.getAdapter().notifyDataSetChanged();
+                 Snackbar.make(v, "Réunion ajoutée :" + meetingApiService.getMeeting().size(), Snackbar.LENGTH_LONG).show();
             }
         });
     }
