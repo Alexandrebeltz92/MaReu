@@ -24,6 +24,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mareu.R;
 import com.example.mareu.di.DI;
+import com.example.mareu.model.Employee;
 import com.example.mareu.model.Meeting;
 import com.example.mareu.model.MeetingRoom;
 import com.example.mareu.service.MeetingApiService;
@@ -199,9 +200,35 @@ public class MeetingListActivity extends AppCompatActivity {
 
     //CREATE MEETING POPUP
     public void ShowPopUpCreateMeeeting(View view){
+        //Initialize variable
+        TextView tvRoom, tvParticipants;
+        boolean[] selectedRoom, selectedParticipants;
+        ArrayList<MeetingRoom> roomsListCreate = new ArrayList<>();
+        String[] roomsArrayList = {"Zeus Room", "Hades Room", "Hermes Room", "Apollo Room", "Poseidon Room"};
         ImageButton btnclose;
+
         myDialog.setContentView(R.layout.popup_create_meeting);
+
+        //Assign variable
         btnclose = (ImageButton) myDialog.findViewById(R.id.imageButton);
+        tvRoom = (TextView) myDialog.findViewById(R.id.tv_room);
+        tvParticipants =(TextView) myDialog.findViewById(R.id.tv_participants);
+
+        //Initialize selected room array
+        selectedRoom = new boolean[roomsArrayList.length];
+
+        tvRoom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Initialize alert dialog
+                AlertDialog.Builder builder = new AlertDialog.Builder(MeetingListActivity.this);
+                //Set title
+                builder.setTitle("Select your room");
+                //Set dialog non cancelable
+                builder.setCancelable(false);
+            }
+        });
+
         btnclose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
