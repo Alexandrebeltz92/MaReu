@@ -19,13 +19,8 @@
 
     <color name="ZeusRoom">#ABDEE6</color>
     <color name="HadesRoom">#C29BA3</color>
-    <color name="AresRoom">#FFFFB5</color>
     <color name="ApolloRoom">#B7EAF7</color>
-    <color name="AthenaRoom">#F3B0C3</color>
     <color name="PoseidonRoom">#CCE2CB</color>
-    <color name="HeraRoom">#97C1A9</color>
     <color name="HermesRoom">#50B4D8</color>
-    <color name="DionysusRoom">#CAB3C1</color>
-    <color name="HeraclesRoom">#57838D</color>
 
 </resources>

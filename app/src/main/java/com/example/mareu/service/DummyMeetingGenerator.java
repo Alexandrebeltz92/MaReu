@@ -14,13 +14,14 @@ import java.util.Random;
 
 public abstract class DummyMeetingGenerator {
 
+    //ROOM GENERATOR
     static MeetingRoom zeusRoom = new MeetingRoom(0,"Zeus Room","Zeus Room");
     static MeetingRoom hadesRoom = new MeetingRoom(0,"Hades Room","Hades Room");
     static MeetingRoom hermesRoom = new MeetingRoom(0,"Hermes Room","Hermes Room");
     static MeetingRoom apolloRoom = new MeetingRoom(0,"Apollo Room","Apollo Room");
     static MeetingRoom poseidonRoom = new MeetingRoom(0,"Poseidon Room","Poseidon Room");
 
-
+    //EMPLOYEE GENERATOR
     static Employee manuel = new Employee(0,"Manuel","Godoy","manuel@gmail.com");
     static Employee louis = new Employee(1,"Louis","De Richet","louis@gmail.com");
     static Employee emily = new Employee(2,"Emily","Hillsborrow","emily@gmail.com");
@@ -32,6 +33,7 @@ public abstract class DummyMeetingGenerator {
     public static ArrayList<Employee> participants2 = new ArrayList<>(Arrays.asList(manuel,louis, gregory, william));
     public static ArrayList<Employee> participants3 = new ArrayList<>(Arrays.asList(louis, emily, christoph, gregory));
 
+    //MEETING GENERATOR
     public static List<Meeting> Dummy_Meetings = Arrays.asList(
             new Meeting(1,"Subject",R.drawable.ic_baseline_circle_24,zeusRoom, addDays(Calendar.getInstance().getTime()), participants1),
             new Meeting(2,"Subject",R.drawable.ic_baseline_circle_24,hadesRoom,addDays(Calendar.getInstance().getTime()),participants1),
