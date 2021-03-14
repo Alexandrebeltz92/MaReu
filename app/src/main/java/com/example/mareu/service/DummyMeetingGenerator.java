@@ -29,13 +29,17 @@ public abstract class DummyMeetingGenerator {
     static Employee gregory = new Employee(4,"Gregory","Holm","gregory@gmail.com");
     static Employee william = new Employee(5,"William Alexander","Mortimer","william@gmail.com");
 
-    public static ArrayList<Employee> participants1 = new ArrayList<>(Arrays.asList(manuel,louis, emily, christoph, gregory, william));
+    public static ArrayList<Employee> participants1 = new ArrayList<>(Arrays.asList(manuel,louis, emily, christoph, william));
     public static ArrayList<Employee> participants2 = new ArrayList<>(Arrays.asList(manuel,louis, gregory, william));
     public static ArrayList<Employee> participants3 = new ArrayList<>(Arrays.asList(louis, emily, christoph, gregory));
+    public static ArrayList<Employee> participantsAll = new ArrayList<>(Arrays.asList(manuel,emily,louis,christoph,gregory,william));
+
+    //?
+    static List<Employee> generateMeetingParticipants() { return  new ArrayList<>(participantsAll);}
 
     //MEETING GENERATOR
     public static List<Meeting> Dummy_Meetings = Arrays.asList(
-            new Meeting(1,"Subject",R.drawable.ic_baseline_circle_24,zeusRoom, addDays(Calendar.getInstance().getTime()), participants1),
+            new Meeting(1,"Subject",R.drawable.ic_baseline_circle_24,zeusRoom, addDays(Calendar.getInstance().getTime()),participants1),
             new Meeting(2,"Subject",R.drawable.ic_baseline_circle_24,hadesRoom,addDays(Calendar.getInstance().getTime()),participants1),
             new Meeting(3,"Subject",R.drawable.ic_baseline_circle_24,hermesRoom,addDays(Calendar.getInstance().getTime()),participants2),
             new Meeting(4,"Subject",R.drawable.ic_baseline_circle_24,apolloRoom,addDays(Calendar.getInstance().getTime()),participants3),

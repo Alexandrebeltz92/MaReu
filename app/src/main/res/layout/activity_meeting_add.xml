@@ -1,67 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/popup_creation_meeting"
-    android:layout_width="350dp"
-    android:layout_height="wrap_content"
+    android:id="@+id/activity_meeting_list"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:layout_gravity="center"
     android:background="@color/white"
     android:orientation="vertical"
     android:padding="5dp">
 
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout_add_meeting"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/my_toolbar_add_meeting"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/toolbar"
+            app:title="Add Meeting"
+            app:titleTextColor="@color/white">
+
+        </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
     <ImageView
-        android:id="@+id/logo_popup_meeting_Add"
+        android:id="@+id/logo_meeting_add_activity"
         android:layout_width="55dp"
         android:layout_height="55dp"
-        android:layout_marginTop="9dp"
+        app:layout_constraintBottom_toBottomOf="@+id/appBarLayout_add_meeting"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/appBarLayout_add_meeting"
         app:srcCompat="@drawable/ic_baseline_groups_24"
-        app:tint="@color/toolbar_dark" />
+        app:tint="@color/white" />
 
     <ImageButton
         android:id="@+id/imageButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="4dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="12dp"
         android:background="@null"
+        android:tint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_baseline_close_24" />
 
     <EditText
-        android:id="@+id/subject_meeting_create_popup"
+        android:id="@+id/subject_meeting_add"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
+        android:background="@android:drawable/editbox_background"
         android:ems="10"
-        android:padding="14dp"
-        android:textAlignment="center"
         android:hint="@string/subject_meeting"
         android:inputType="textPersonName"
-        android:background="@android:drawable/editbox_background"
+        android:padding="5dp"
+        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logo_popup_meeting_Add" />
+        app:layout_constraintTop_toBottomOf="@+id/logo_meeting_add_activity" />
 
 
-    <TextView
-        android:id="@+id/tv_room"
+    <Spinner
+        android:id="@+id/spinner_room"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:background="@android:drawable/editbox_background"
-        android:drawableEnd="@android:drawable/arrow_down_float"
-        android:drawablePadding="12dp"
         android:hint="Select your room."
         android:padding="16dp"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/subject_meeting_create_popup" />
+        app:layout_constraintTop_toBottomOf="@+id/subject_meeting_add" />
 
     <TextView
         android:id="@+id/tv_participants"
@@ -72,29 +93,23 @@
         android:drawableEnd="@android:drawable/arrow_down_float"
         android:drawablePadding="12dp"
         android:hint="Select your participants."
-        android:padding="16dp"
+        android:padding="5dp"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_room" />
+        app:layout_constraintTop_toBottomOf="@+id/spinner_room" />
 
-    <Button
-        android:id="@+id/add_meeting_button_create_popup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+
+    <ImageButton
+        android:id="@+id/add_meeting_button_create"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
         android:layout_marginBottom="9dp"
-        android:text="Ajouter"
+        android:backgroundTint="@color/toolbar_dark"
+        android:tint="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_participants" />
-
-    lListe des réunions comprenant :
-    l’heure de la réunion ;
-    le lieu de la réunion ;
-    le sujet de la réunion ;
-    lla liste des participants (adresses mail).
-
+        app:srcCompat="@drawable/ic_round_add_box_24" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,6 +3,7 @@ package com.example.mareu.ui;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -27,6 +28,7 @@ import com.example.mareu.di.DI;
 import com.example.mareu.model.Employee;
 import com.example.mareu.model.Meeting;
 import com.example.mareu.model.MeetingRoom;
+import com.example.mareu.service.DummyMeetingGenerator;
 import com.example.mareu.service.MeetingApiService;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -50,6 +52,8 @@ public class MeetingListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_meeting_list);
+
+        //
         myDialog = new Dialog(this);
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
@@ -105,11 +109,13 @@ public class MeetingListActivity extends AppCompatActivity {
             }
         });
 
-       // mFabCreateMeeting.setOnClickListener(new View.OnClickListener() {
-       //     @Override
-       //     public void onClick(View v) {
-       //     }
-       // });
+        mFabCreateMeeting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MeetingListActivity.this, MeetingAddActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     //MENU & MENU OPTIONS
@@ -197,46 +203,4 @@ public class MeetingListActivity extends AppCompatActivity {
                 }, mYear, mMonth, mDay);
         datePickerDialog.show();
     }
-
-    //CREATE MEETING POPUP
-    public void ShowPopUpCreateMeeeting(View view){
-        //Initialize variable
-        TextView tvRoom, tvParticipants;
-        boolean[] selectedRoom, selectedParticipants;
-        ArrayList<MeetingRoom> roomsListCreate = new ArrayList<>();
-        String[] roomsArrayList = {"Zeus Room", "Hades Room", "Hermes Room", "Apollo Room", "Poseidon Room"};
-        ImageButton btnclose;
-
-        myDialog.setContentView(R.layout.popup_create_meeting);
-
-        //Assign variable
-        btnclose = (ImageButton) myDialog.findViewById(R.id.imageButton);
-        tvRoom = (TextView) myDialog.findViewById(R.id.tv_room);
-        tvParticipants =(TextView) myDialog.findViewById(R.id.tv_participants);
-
-        //Initialize selected room array
-        selectedRoom = new boolean[roomsArrayList.length];
-
-        tvRoom.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Initialize alert dialog
-                AlertDialog.Builder builder = new AlertDialog.Builder(MeetingListActivity.this);
-                //Set title
-                builder.setTitle("Select your room");
-                //Set dialog non cancelable
-                builder.setCancelable(false);
-            }
-        });
-
-        btnclose.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                myDialog.dismiss();
-            }
-        });
-        myDialog.show();
-    }
-
-
 }
