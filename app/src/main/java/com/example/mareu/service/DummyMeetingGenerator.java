@@ -15,11 +15,16 @@ import java.util.Random;
 public abstract class DummyMeetingGenerator {
 
     //ROOM GENERATOR
+
     static MeetingRoom zeusRoom = new MeetingRoom(0,"Zeus Room","Zeus Room");
-    static MeetingRoom hadesRoom = new MeetingRoom(0,"Hades Room","Hades Room");
-    static MeetingRoom hermesRoom = new MeetingRoom(0,"Hermes Room","Hermes Room");
-    static MeetingRoom apolloRoom = new MeetingRoom(0,"Apollo Room","Apollo Room");
-    static MeetingRoom poseidonRoom = new MeetingRoom(0,"Poseidon Room","Poseidon Room");
+    static MeetingRoom hadesRoom = new MeetingRoom(1,"Hades Room","Hades Room");
+    static MeetingRoom hermesRoom = new MeetingRoom(2,"Hermes Room","Hermes Room");
+    static MeetingRoom apolloRoom = new MeetingRoom(3,"Apollo Room","Apollo Room");
+    static MeetingRoom poseidonRoom = new MeetingRoom(4,"Poseidon Room","Poseidon Room");
+
+    static List<MeetingRoom> sMeetingRoomList = new ArrayList<>(Arrays.asList(zeusRoom,hadesRoom,hermesRoom,apolloRoom,poseidonRoom));
+
+    public static List<MeetingRoom> generateMeetingRoom() {return  new ArrayList<>(sMeetingRoomList);}
 
     //EMPLOYEE GENERATOR
     static Employee manuel = new Employee(0,"Manuel","Godoy","manuel@gmail.com");
@@ -35,7 +40,7 @@ public abstract class DummyMeetingGenerator {
     public static ArrayList<Employee> participantsAll = new ArrayList<>(Arrays.asList(manuel,emily,louis,christoph,gregory,william));
 
     //?
-    static List<Employee> generateMeetingParticipants() { return  new ArrayList<>(participantsAll);}
+    public static List<Employee> generateMeetingParticipants() { return  new ArrayList<>(participantsAll);}
 
     //MEETING GENERATOR
     public static List<Meeting> Dummy_Meetings = Arrays.asList(

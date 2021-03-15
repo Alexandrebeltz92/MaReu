@@ -111,7 +111,6 @@
                 android:text="@string/participants_meeting"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintHorizontal_bias="0"
                 app:layout_constraintLeft_toRightOf="@id/avatar_meeting"
                 app:layout_constraintRight_toLeftOf="@+id/item_list_delete_button"
                 app:layout_constraintTop_toBottomOf="@id/subject_meeting" />

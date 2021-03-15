@@ -2,8 +2,8 @@ package com.example.mareu.model;
 
 public class MeetingRoom {
 
-    int id;
-    String place, name;
+    private int id;
+    private String place, name;
 
     public MeetingRoom(int id, String place, String name) {
         this.id = id;
@@ -30,4 +30,10 @@ public class MeetingRoom {
     public void setName(String name) {
         this.name = name;
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
+
 }
