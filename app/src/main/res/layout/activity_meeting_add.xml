@@ -12,36 +12,16 @@
     android:orientation="vertical"
     android:padding="5dp">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appBarLayout_add_meeting"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/my_toolbar_add_meeting"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@color/toolbar"
-            app:title="Add Meeting"
-            app:titleTextColor="@color/white">
-
-        </androidx.appcompat.widget.Toolbar>
-
-    </com.google.android.material.appbar.AppBarLayout>
-
     <ImageView
         android:id="@+id/logo_meeting_add_activity"
         android:layout_width="55dp"
         android:layout_height="55dp"
-        app:layout_constraintBottom_toBottomOf="@+id/appBarLayout_add_meeting"
+        android:layout_marginTop="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/appBarLayout_add_meeting"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_baseline_groups_24"
-        app:tint="@color/white" />
+        app:tint="@color/toolbar" />
 
     <ImageButton
         android:id="@+id/imageButtonClose"
@@ -50,10 +30,10 @@
         android:layout_marginTop="15dp"
         android:layout_marginEnd="12dp"
         android:background="@null"
-        android:tint="@color/white"
+        android:tint="@color/toolbar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_baseline_close_24" />
+        app:srcCompat="@drawable/ic_baseline_close_24"/>
 
     <EditText
         android:id="@+id/subject_meeting_add"

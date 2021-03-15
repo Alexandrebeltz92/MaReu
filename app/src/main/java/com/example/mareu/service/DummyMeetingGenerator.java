@@ -16,23 +16,23 @@ public abstract class DummyMeetingGenerator {
 
     //ROOM GENERATOR
 
-    static MeetingRoom zeusRoom = new MeetingRoom(0,"Zeus Room","Zeus Room");
-    static MeetingRoom hadesRoom = new MeetingRoom(1,"Hades Room","Hades Room");
-    static MeetingRoom hermesRoom = new MeetingRoom(2,"Hermes Room","Hermes Room");
-    static MeetingRoom apolloRoom = new MeetingRoom(3,"Apollo Room","Apollo Room");
-    static MeetingRoom poseidonRoom = new MeetingRoom(4,"Poseidon Room","Poseidon Room");
+    static MeetingRoom zeusRoom = new MeetingRoom(1,"Zeus Room","Zeus Room");
+    static MeetingRoom hadesRoom = new MeetingRoom(2,"Hades Room","Hades Room");
+    static MeetingRoom hermesRoom = new MeetingRoom(3,"Hermes Room","Hermes Room");
+    static MeetingRoom apolloRoom = new MeetingRoom(4,"Apollo Room","Apollo Room");
+    static MeetingRoom poseidonRoom = new MeetingRoom(5,"Poseidon Room","Poseidon Room");
 
     static List<MeetingRoom> sMeetingRoomList = new ArrayList<>(Arrays.asList(zeusRoom,hadesRoom,hermesRoom,apolloRoom,poseidonRoom));
 
     public static List<MeetingRoom> generateMeetingRoom() {return  new ArrayList<>(sMeetingRoomList);}
 
     //EMPLOYEE GENERATOR
-    static Employee manuel = new Employee(0,"Manuel","Godoy","manuel@gmail.com");
-    static Employee louis = new Employee(1,"Louis","De Richet","louis@gmail.com");
-    static Employee emily = new Employee(2,"Emily","Hillsborrow","emily@gmail.com");
-    static Employee christoph = new Employee(3,"Johan Christoph","von Wollner","johan@gmail.com");
-    static Employee gregory = new Employee(4,"Gregory","Holm","gregory@gmail.com");
-    static Employee william = new Employee(5,"William Alexander","Mortimer","william@gmail.com");
+    static Employee manuel = new Employee(1,"Manuel","Godoy","manuel@gmail.com");
+    static Employee louis = new Employee(2,"Louis","De Richet","louis@gmail.com");
+    static Employee emily = new Employee(3,"Emily","Hillsborrow","emily@gmail.com");
+    static Employee christoph = new Employee(4,"Johan Christoph","von Wollner","johan@gmail.com");
+    static Employee gregory = new Employee(5,"Gregory","Holm","gregory@gmail.com");
+    static Employee william = new Employee(6,"William Alexander","Mortimer","william@gmail.com");
 
     public static ArrayList<Employee> participants1 = new ArrayList<>(Arrays.asList(manuel,louis, emily, christoph, william));
     public static ArrayList<Employee> participants2 = new ArrayList<>(Arrays.asList(manuel,louis, gregory, william));
