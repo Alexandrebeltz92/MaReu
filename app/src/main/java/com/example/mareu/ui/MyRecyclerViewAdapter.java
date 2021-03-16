@@ -51,6 +51,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         holder.mDeleteMeeting.setOnClickListener(v -> {
             listener.OnItemClicked(filterList.get(position));
         });
+        setRoomColor(holder, meeting.getMeetingRoom().getId());
     }
 
     private String addText(ArrayList<Employee> participants) {
@@ -70,19 +71,19 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     private void setRoomColor(@NonNull MyViewHolder holder, int position) {
         switch (position) {
             case 1:
-                holder.mAvatar.getBackground().setTint(ContextCompat.getColor(holder.itemView.getContext(),R.color.ZeusRoom));
+                holder.mAvatar.setColorFilter(ContextCompat.getColor(holder.itemView.getContext(), R.color.ZeusRoom), android.graphics.PorterDuff.Mode.MULTIPLY);
                 break;
             case 2 :
-                holder.mAvatar.getBackground().setTint(ContextCompat.getColor(holder.itemView.getContext(),R.color.HadesRoom));
+                holder.mAvatar.setColorFilter(ContextCompat.getColor(holder.itemView.getContext(), R.color.HadesRoom), android.graphics.PorterDuff.Mode.MULTIPLY);
                 break;
             case 3:
-                holder.mAvatar.getBackground().setTint(ContextCompat.getColor(holder.itemView.getContext(),R.color.PoseidonRoom));
+                holder.mAvatar.setColorFilter(ContextCompat.getColor(holder.itemView.getContext(), R.color.HermesRoom), android.graphics.PorterDuff.Mode.MULTIPLY);
                 break;
             case 4 :
-                holder.mAvatar.getBackground().setTint(ContextCompat.getColor(holder.itemView.getContext(),R.color.ApolloRoom));
+                holder.mAvatar.setColorFilter(ContextCompat.getColor(holder.itemView.getContext(), R.color.ApolloRoom), android.graphics.PorterDuff.Mode.MULTIPLY);
                 break;
             case 5:
-                holder.mAvatar.getBackground().setTint(ContextCompat.getColor(holder.itemView.getContext(),R.color.HermesRoom));
+                holder.mAvatar.setColorFilter(ContextCompat.getColor(holder.itemView.getContext(), R.color.PoseidonRoom), android.graphics.PorterDuff.Mode.MULTIPLY);
                 break;
         }
     }

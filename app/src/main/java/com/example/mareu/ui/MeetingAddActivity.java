@@ -16,11 +16,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import com.example.mareu.R;
+import com.example.mareu.di.DI;
+import com.example.mareu.model.Meeting;
 import com.example.mareu.model.MeetingRoom;
 import com.example.mareu.service.DummyMeetingGenerator;
+import com.example.mareu.service.MeetingApiService;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+
+import static com.example.mareu.service.DummyMeetingGenerator.addDays;
+import static com.example.mareu.service.DummyMeetingGenerator.participants1;
 
 public class MeetingAddActivity extends AppCompatActivity {
 
@@ -29,6 +36,7 @@ public class MeetingAddActivity extends AppCompatActivity {
     private EditText mSubjectMeeting;
     private Spinner mSpinnerRoom;
     private TextView mTextViewParticipants;
+    MeetingApiService meetingApiService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +52,8 @@ public class MeetingAddActivity extends AppCompatActivity {
         // finally change the color
         window.setStatusBarColor(ContextCompat.getColor(this, R.color.toolbar_dark));
 
+        meetingApiService = DI.getMeetingApiService();
+
         //variable
         mCloseButton = findViewById(R.id.imageButtonClose);
         mAddButton = findViewById(R.id.add_meeting_button_create);
@@ -51,6 +61,7 @@ public class MeetingAddActivity extends AppCompatActivity {
         mSpinnerRoom = (Spinner) findViewById(R.id.spinner_room);
         mTextViewParticipants = findViewById(R.id.tv_participants);
 
+        //Spinner Meeting Room
         List<MeetingRoom> RoomList = new ArrayList<>();
         RoomList.addAll(DummyMeetingGenerator.generateMeetingRoom());
 
@@ -59,33 +70,23 @@ public class MeetingAddActivity extends AppCompatActivity {
 
         mSpinnerRoom.setAdapter(adapter);
 
-        mSpinnerRoom.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        //Close Meeting Add Activity
+        mCloseButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                MeetingRoom meetingRoom = (MeetingRoom) parent.getSelectedItem();
-                displayRoomData(meetingRoom);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
+            public void onClick(View v) {
+                finish();
             }
         });
 
-    }
-
-    public void getSelectedRoom(View v) {
-        MeetingRoom meetingRoom = (MeetingRoom) mSpinnerRoom.getSelectedItem();
-        displayRoomData(meetingRoom);
-    }
-
-    private void displayRoomData(MeetingRoom meetingRoom) {
-        String name = meetingRoom.getName();
-        String place = meetingRoom.getPlace();
-        int id = meetingRoom.getId();
-
-        String meetingRoomData = name;
-        Toast.makeText(this,meetingRoomData,Toast.LENGTH_LONG).show();
+        //Add Meeting
+        mAddButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Meeting m = new Meeting(1,mSubjectMeeting.getText().toString(),R.drawable.ic_baseline_circle_24, (MeetingRoom) mSpinnerRoom.getSelectedItem(), addDays(Calendar.getInstance().getTime()),participants1);
+                meetingApiService.createMeeting(m);
+                finish();
+            }
+        });
     }
 
 }

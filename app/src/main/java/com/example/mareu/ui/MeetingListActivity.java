@@ -38,23 +38,17 @@ import java.util.Calendar;
 
 public class MeetingListActivity extends AppCompatActivity {
 
+
     RecyclerView mRecyclerView;
     FloatingActionButton mFab;
     FloatingActionButton mFabRandomMeeting;
     FloatingActionButton mFabCreateMeeting;
     MeetingApiService meetingApiService;
 
-    //Popup create meeting
-    Dialog myDialog;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_meeting_list);
-
-        //
-        myDialog = new Dialog(this);
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
@@ -86,7 +80,7 @@ public class MeetingListActivity extends AppCompatActivity {
             }
         });
 
-        // FLOATING ACTION BUTTON
+        //FLOATING ACTION BUTTON
         mFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -102,8 +96,7 @@ public class MeetingListActivity extends AppCompatActivity {
 
         mFabRandomMeeting.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                 meetingApiService.createMeeting(Meeting.random());
+            public void onClick(View v) { meetingApiService.createMeeting(Meeting.random());
                  mRecyclerView.getAdapter().notifyDataSetChanged();
                  Snackbar.make(v, "Réunion ajoutée :" + meetingApiService.getMeeting().size(), Snackbar.LENGTH_LONG).show();
             }
@@ -116,6 +109,13 @@ public class MeetingListActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    //
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mRecyclerView.getAdapter().notifyDataSetChanged();
     }
 
     //MENU & MENU OPTIONS
