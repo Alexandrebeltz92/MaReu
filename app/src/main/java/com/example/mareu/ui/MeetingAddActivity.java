@@ -35,7 +35,6 @@ public class MeetingAddActivity extends AppCompatActivity {
     private EditText mSubjectMeeting;
     private Spinner mSpinnerRoom;
     private Spinner mSpinnerParticipants;
-    boolean[] selectedParticipants;
     MeetingApiService meetingApiService;
 
     @Override
@@ -70,6 +69,15 @@ public class MeetingAddActivity extends AppCompatActivity {
 
         mSpinnerRoom.setAdapter(adapter);
 
+        //Spinner Participants
+        List<Employee> EmployeeList = new ArrayList<>();
+        EmployeeList.addAll(DummyMeetingGenerator.generateMeetingParticipants());
+
+        ArrayAdapter<Employee> adapter1 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,EmployeeList);
+        adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        mSpinnerParticipants.setAdapter(adapter1);
+
         //Close Meeting Add Activity
         mCloseButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,20 +90,10 @@ public class MeetingAddActivity extends AppCompatActivity {
         mAddButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Meeting m = new Meeting(1,mSubjectMeeting.getText().toString(),R.drawable.ic_baseline_circle_24, (MeetingRoom) mSpinnerRoom.getSelectedItem(), addDays(Calendar.getInstance().getTime()),participants1);
+                Meeting m = new Meeting(1,mSubjectMeeting.getText().toString(),R.drawable.ic_baseline_circle_24, (MeetingRoom) mSpinnerRoom.getSelectedItem(), addDays(Calendar.getInstance().getTime()), (Employee) mSpinnerParticipants.getSelectedItem());
                 meetingApiService.createMeeting(m);
                 finish();
             }
         });
-
-        //Spinner Participants
-        List<Employee> EmployeeList = new ArrayList<>();
-        EmployeeList.addAll(DummyMeetingGenerator.generateMeetingParticipants());
-
-        ArrayAdapter<Employee> adapter1 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,EmployeeList);
-        adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        mSpinnerParticipants.setAdapter(adapter1);
     }
-
 }

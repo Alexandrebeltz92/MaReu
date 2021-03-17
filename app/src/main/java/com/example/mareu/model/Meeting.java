@@ -37,14 +37,14 @@ public class Meeting {
     /**
      * Participants
      */
-    private ArrayList<Employee> participants;
+    private Employee participants;
 
     /**
      * Constructor
      */
 
     public Meeting(long id, String subject, int avatarMeeting, MeetingRoom meetingRoom,
-                   Date date, ArrayList<Employee> participants) {
+                   Date date, Employee participants) {
         this.id = id;
         this.subject = subject;
         this.avatarMeeting = avatarMeeting;
@@ -95,11 +95,11 @@ public class Meeting {
         this.date = date;
     }
 
-    public ArrayList<Employee> getParticipants() {
+    public Employee getParticipants() {
         return participants;
     }
 
-    public void setParticipants(ArrayList<Employee> participants) {
+    public void setParticipants(Employee participants) {
         this.participants = participants;
     }
 
