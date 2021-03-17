@@ -27,6 +27,7 @@ import java.util.List;
 
 import static com.example.mareu.service.DummyMeetingGenerator.addDays;
 import static com.example.mareu.service.DummyMeetingGenerator.participants1;
+import static com.example.mareu.service.DummyMeetingGenerator.participantsAll;
 
 public class MeetingAddActivity extends AppCompatActivity {
 
@@ -90,7 +91,7 @@ public class MeetingAddActivity extends AppCompatActivity {
         mAddButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Meeting m = new Meeting(1,mSubjectMeeting.getText().toString(),R.drawable.ic_baseline_circle_24, (MeetingRoom) mSpinnerRoom.getSelectedItem(), addDays(Calendar.getInstance().getTime()), (Employee) mSpinnerParticipants.getSelectedItem());
+                Meeting m = new Meeting(1,mSubjectMeeting.getText().toString(),R.drawable.ic_baseline_circle_24, (MeetingRoom) mSpinnerRoom.getSelectedItem(), addDays(Calendar.getInstance().getTime()), (ArrayList<Employee>) mSpinnerParticipants.getSelectedItem());
                 meetingApiService.createMeeting(m);
                 finish();
             }
