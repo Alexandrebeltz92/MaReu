@@ -4,19 +4,18 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import com.example.mareu.R;
 import com.example.mareu.di.DI;
+import com.example.mareu.model.Employee;
 import com.example.mareu.model.Meeting;
 import com.example.mareu.model.MeetingRoom;
 import com.example.mareu.service.DummyMeetingGenerator;
@@ -35,7 +34,8 @@ public class MeetingAddActivity extends AppCompatActivity {
     private ImageButton mCloseButton, mAddButton;
     private EditText mSubjectMeeting;
     private Spinner mSpinnerRoom;
-    private TextView mTextViewParticipants;
+    private Spinner mSpinnerParticipants;
+    boolean[] selectedParticipants;
     MeetingApiService meetingApiService;
 
     @Override
@@ -54,12 +54,12 @@ public class MeetingAddActivity extends AppCompatActivity {
 
         meetingApiService = DI.getMeetingApiService();
 
-        //variable
+        //Assign variable
         mCloseButton = findViewById(R.id.imageButtonClose);
         mAddButton = findViewById(R.id.add_meeting_button_create);
         mSubjectMeeting = findViewById(R.id.subject_meeting_add);
         mSpinnerRoom = (Spinner) findViewById(R.id.spinner_room);
-        mTextViewParticipants = findViewById(R.id.tv_participants);
+        mSpinnerParticipants = (Spinner) findViewById(R.id.spinner_participants);
 
         //Spinner Meeting Room
         List<MeetingRoom> RoomList = new ArrayList<>();
@@ -87,6 +87,15 @@ public class MeetingAddActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        //Spinner Participants
+        List<Employee> EmployeeList = new ArrayList<>();
+        EmployeeList.addAll(DummyMeetingGenerator.generateMeetingParticipants());
+
+        ArrayAdapter<Employee> adapter1 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,EmployeeList);
+        adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        mSpinnerParticipants.setAdapter(adapter1);
     }
 
 }
