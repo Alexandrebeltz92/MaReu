@@ -1,5 +1,6 @@
 package com.example.mareu.ui;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -7,9 +8,11 @@ import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.MultiAutoCompleteTextView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
@@ -23,6 +26,7 @@ import com.example.mareu.service.MeetingApiService;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.List;
 
 import static com.example.mareu.service.DummyMeetingGenerator.addDays;
@@ -74,7 +78,7 @@ public class MeetingAddActivity extends AppCompatActivity {
         List<Employee> EmployeeList = new ArrayList<>();
         EmployeeList.addAll(DummyMeetingGenerator.generateMeetingParticipants());
 
-        ArrayAdapter<Employee> adapter1 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,EmployeeList);
+        ArrayAdapter<Employee> adapter1 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, EmployeeList);
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         mSpinnerParticipants.setAdapter(adapter1);
@@ -91,7 +95,7 @@ public class MeetingAddActivity extends AppCompatActivity {
         mAddButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Meeting m = new Meeting(1,mSubjectMeeting.getText().toString(),R.drawable.ic_baseline_circle_24, (MeetingRoom) mSpinnerRoom.getSelectedItem(), addDays(Calendar.getInstance().getTime()), (ArrayList<Employee>) mSpinnerParticipants.getSelectedItem());
+                Meeting m = new Meeting(1, mSubjectMeeting.getText().toString(), R.drawable.ic_baseline_circle_24, (MeetingRoom) mSpinnerRoom.getSelectedItem(), addDays(Calendar.getInstance().getTime()), (ArrayList<Employee>) mSpinnerParticipants.getSelectedItem());
                 meetingApiService.createMeeting(m);
                 finish();
             }

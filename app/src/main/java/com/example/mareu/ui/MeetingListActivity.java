@@ -84,7 +84,7 @@ public class MeetingListActivity extends AppCompatActivity {
         mFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(mFabRandomMeeting.getVisibility() == View.VISIBLE && mFabCreateMeeting.getVisibility() == View.VISIBLE) {
+                if (mFabRandomMeeting.getVisibility() == View.VISIBLE && mFabCreateMeeting.getVisibility() == View.VISIBLE) {
                     mFabCreateMeeting.setVisibility(View.GONE);
                     mFabRandomMeeting.setVisibility(View.GONE);
                 } else {
@@ -96,9 +96,10 @@ public class MeetingListActivity extends AppCompatActivity {
 
         mFabRandomMeeting.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) { meetingApiService.createMeeting(Meeting.random());
-                 mRecyclerView.getAdapter().notifyDataSetChanged();
-                 Snackbar.make(v, "Réunion ajoutée :" + meetingApiService.getMeeting().size(), Snackbar.LENGTH_LONG).show();
+            public void onClick(View v) {
+                meetingApiService.createMeeting(Meeting.random());
+                mRecyclerView.getAdapter().notifyDataSetChanged();
+                Snackbar.make(v, "Réunion ajoutée :" + meetingApiService.getMeeting().size(), Snackbar.LENGTH_LONG).show();
             }
         });
 
@@ -163,13 +164,13 @@ public class MeetingListActivity extends AppCompatActivity {
             }
         });
 
-        builder.setPositiveButton("OK" ,new DialogInterface.OnClickListener() {
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
                 ArrayList<String> rooms = new ArrayList<>();
                 for (int i = 0; i < roomsList.length; i++) {
-                    if  (isCheckedList[i]) {
+                    if (isCheckedList[i]) {
                         rooms.add(roomsList[i]);
                     }
                 }
