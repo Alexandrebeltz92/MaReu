@@ -30,8 +30,6 @@ import java.util.Collections;
 import java.util.List;
 
 import static com.example.mareu.service.DummyMeetingGenerator.addDays;
-import static com.example.mareu.service.DummyMeetingGenerator.participants1;
-import static com.example.mareu.service.DummyMeetingGenerator.participantsAll;
 
 public class MeetingAddActivity extends AppCompatActivity {
 
@@ -39,12 +37,8 @@ public class MeetingAddActivity extends AppCompatActivity {
     private ImageButton mCloseButton, mAddButton;
     private EditText mSubjectMeeting;
     private Spinner mSpinnerRoom;
-    private Spinner mSpinnerParticipants;
+    private MultiAutoCompleteTextView mTVParticipants;
     MeetingApiService meetingApiService;
-    MultiAutoCompleteTextView mEmployeeMail;
-
-    public List<Employee> listGuests = DummyMeetingGenerator.generateMeetingParticipants();
-    public MultiAutoCompleteTextView guestsEmails;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,9 +60,8 @@ public class MeetingAddActivity extends AppCompatActivity {
         mCloseButton = findViewById(R.id.imageButtonClose);
         mAddButton = findViewById(R.id.add_meeting_button_create);
         mSubjectMeeting = findViewById(R.id.subject_meeting_add);
-        mSpinnerRoom = (Spinner) findViewById(R.id.spinner_room);
-        mSpinnerParticipants = (Spinner) findViewById(R.id.spinner_participants);
-        mEmployeeMail = (MultiAutoCompleteTextView) findViewById(R.id.text_employee_mail);
+        mSpinnerRoom = findViewById(R.id.spinner_room);
+        mTVParticipants = findViewById(R.id.tv_participants);
 
         //Spinner Meeting Room
         List<MeetingRoom> RoomList = new ArrayList<>();
@@ -79,31 +72,13 @@ public class MeetingAddActivity extends AppCompatActivity {
 
         mSpinnerRoom.setAdapter(adapter);
 
-        //Spinner Participants
-        List<Employee> EmployeeList = new ArrayList<>();
-        EmployeeList.addAll(DummyMeetingGenerator.generateMeetingParticipants());
+        //MultiAutoCompleteTextView Participants
+       String participantsMail = DummyMeetingGenerator.participantsAll.toString();
+       ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, Collections.singletonList(participantsMail));
+       mTVParticipants.setAdapter(adapter1);
+       mTVParticipants.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
 
-        ArrayAdapter<Employee> adapter1 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, EmployeeList);
-        adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        mSpinnerParticipants.setAdapter(adapter1);
-
-        // GUESTS LIST   - Sets the autocompletion for the Guests selection
-        private void setEmployeeMailArray(){
-            // Guest list : listGuests
-            ArrayList<String> mEmployeeMail = new ArrayList<>();
-            int nbGuests = listGuests.size();
-            for (int mId = 0; mId < nbGuests; mId++) {
-                String mGuestEmail = listGuests.get( mId ).getEmail();
-                mEmployeeMail.add( mGuestEmail );
-            }
-            String[] guestEmailsList = mEmployeeMail.toArray( new String[0] );
-            ArrayAdapter<String> adapterGuests
-                    = new ArrayAdapter<>( this, android.R.layout.simple_list_item_1, guestEmailsList );
-            guestsEmails.setAdapter( adapterGuests );
-            guestsEmails.setThreshold( 1 );                                                  // Sets the minimum number of characters, to show suggestions
-            guestsEmails.setTokenizer( new MultiAutoCompleteTextView.CommaTokenizer() );     // then separates them with a comma
-        }
 
         //Close Meeting Add Activity
         mCloseButton.setOnClickListener(new View.OnClickListener() {
@@ -117,7 +92,7 @@ public class MeetingAddActivity extends AppCompatActivity {
         mAddButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Meeting m = new Meeting(1, mSubjectMeeting.getText().toString(), R.drawable.ic_baseline_circle_24, (MeetingRoom) mSpinnerRoom.getSelectedItem(), addDays(Calendar.getInstance().getTime()), (ArrayList<Employee>) mSpinnerParticipants.getSelectedItem());
+                Meeting m = new Meeting(1, mSubjectMeeting.getText().toString(), R.drawable.ic_baseline_circle_24, (MeetingRoom) mSpinnerRoom.getSelectedItem(), addDays(Calendar.getInstance().getTime()), (ArrayList<Employee>) mTVParticipants.getText());
                 meetingApiService.createMeeting(m);
                 finish();
             }
