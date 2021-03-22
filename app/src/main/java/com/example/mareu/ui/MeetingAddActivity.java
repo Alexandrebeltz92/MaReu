@@ -73,13 +73,13 @@ public class MeetingAddActivity extends AppCompatActivity {
         mSpinnerRoom.setAdapter(adapter);
 
         //MultiAutoCompleteTextView Participants
-       String participantsMail = DummyMeetingGenerator.participantsAll.toString();
-       ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, Collections.singletonList(participantsMail));
-       mTVParticipants.setAdapter(adapter1);
-       mTVParticipants.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
+        List<Employee> employeeList = new ArrayList<>();
+        employeeList.addAll(DummyMeetingGenerator.generateMeetingParticipants());
+        ArrayAdapter<Employee> adapter1 = new ArrayAdapter<Employee>(this, android.R.layout.simple_list_item_1, employeeList);
+        mTVParticipants.setAdapter(adapter1);
+        mTVParticipants.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
 
-
-
+        
         //Close Meeting Add Activity
         mCloseButton.setOnClickListener(new View.OnClickListener() {
             @Override
