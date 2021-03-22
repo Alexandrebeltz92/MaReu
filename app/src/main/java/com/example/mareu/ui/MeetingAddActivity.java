@@ -41,6 +41,10 @@ public class MeetingAddActivity extends AppCompatActivity {
     private Spinner mSpinnerRoom;
     private Spinner mSpinnerParticipants;
     MeetingApiService meetingApiService;
+    MultiAutoCompleteTextView mEmployeeMail;
+
+    public List<Employee> listGuests = DummyMeetingGenerator.generateMeetingParticipants();
+    public MultiAutoCompleteTextView guestsEmails;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +68,7 @@ public class MeetingAddActivity extends AppCompatActivity {
         mSubjectMeeting = findViewById(R.id.subject_meeting_add);
         mSpinnerRoom = (Spinner) findViewById(R.id.spinner_room);
         mSpinnerParticipants = (Spinner) findViewById(R.id.spinner_participants);
+        mEmployeeMail = (MultiAutoCompleteTextView) findViewById(R.id.text_employee_mail);
 
         //Spinner Meeting Room
         List<MeetingRoom> RoomList = new ArrayList<>();
@@ -82,6 +87,23 @@ public class MeetingAddActivity extends AppCompatActivity {
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         mSpinnerParticipants.setAdapter(adapter1);
+
+        // GUESTS LIST   - Sets the autocompletion for the Guests selection
+        private void setEmployeeMailArray(){
+            // Guest list : listGuests
+            ArrayList<String> mEmployeeMail = new ArrayList<>();
+            int nbGuests = listGuests.size();
+            for (int mId = 0; mId < nbGuests; mId++) {
+                String mGuestEmail = listGuests.get( mId ).getEmail();
+                mEmployeeMail.add( mGuestEmail );
+            }
+            String[] guestEmailsList = mEmployeeMail.toArray( new String[0] );
+            ArrayAdapter<String> adapterGuests
+                    = new ArrayAdapter<>( this, android.R.layout.simple_list_item_1, guestEmailsList );
+            guestsEmails.setAdapter( adapterGuests );
+            guestsEmails.setThreshold( 1 );                                                  // Sets the minimum number of characters, to show suggestions
+            guestsEmails.setTokenizer( new MultiAutoCompleteTextView.CommaTokenizer() );     // then separates them with a comma
+        }
 
         //Close Meeting Add Activity
         mCloseButton.setOnClickListener(new View.OnClickListener() {
