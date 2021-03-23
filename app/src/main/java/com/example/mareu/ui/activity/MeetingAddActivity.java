@@ -1,10 +1,11 @@
-package com.example.mareu.ui;
+package com.example.mareu.ui.activity;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;

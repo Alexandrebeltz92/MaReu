@@ -1,4 +1,4 @@
-package com.example.mareu.ui;
+package com.example.mareu.ui.activity;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -11,8 +11,6 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.DatePicker;
-import android.widget.ImageButton;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -25,11 +23,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mareu.R;
 import com.example.mareu.di.DI;
-import com.example.mareu.model.Employee;
 import com.example.mareu.model.Meeting;
-import com.example.mareu.model.MeetingRoom;
-import com.example.mareu.service.DummyMeetingGenerator;
 import com.example.mareu.service.MeetingApiService;
+import com.example.mareu.ui.adapter.MyRecyclerViewAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 

@@ -2,6 +2,7 @@ package com.example.mareu;
 
 import com.example.mareu.di.DI;
 import com.example.mareu.model.Meeting;
+import com.example.mareu.model.MeetingRoom;
 import com.example.mareu.service.DummyMeetingGenerator;
 import com.example.mareu.service.MeetingApiService;
 
@@ -39,7 +40,7 @@ public void deleteMeetingWithSuccess() {
 
 @Test
 public void createMeetingWithSuccess() {
-        Meeting meetingToCreate = new Meeting((long) service.getMeeting().size(), "Mon meeting Test", R.drawable.ic_baseline_circle_24, "Room Test", Calendar.getInstance().getTime(), "Test@gmail.com");
+        Meeting meetingToCreate = new Meeting(1, "Mon meeting Test", R.drawable.ic_baseline_circle_24, DummyMeetingGenerator.generateMeetingRoom().get(1), Calendar.getInstance().getTime(), DummyMeetingGenerator.participants1);
         service.createMeeting(meetingToCreate);
         assertTrue(service.getMeeting().contains(meetingToCreate));
         }

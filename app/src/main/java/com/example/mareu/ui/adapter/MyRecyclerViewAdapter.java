@@ -1,4 +1,4 @@
-package com.example.mareu.ui;
+package com.example.mareu.ui.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
