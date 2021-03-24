@@ -1,19 +1,17 @@
 package com.example.mareu.ui.activity;
 
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.MultiAutoCompleteTextView;
 import android.widget.Spinner;
-import android.widget.TextView;
+import android.widget.TimePicker;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
@@ -27,7 +25,7 @@ import com.example.mareu.service.MeetingApiService;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import static com.example.mareu.service.DummyMeetingGenerator.addDays;
@@ -39,13 +37,17 @@ public class MeetingAddActivity extends AppCompatActivity {
     private EditText mSubjectMeeting;
     private Spinner mSpinnerRoom;
     private MultiAutoCompleteTextView mTVParticipants;
+    private DatePicker mDatePicker;
+    private TimePicker mTimePicker;
     MeetingApiService meetingApiService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_meeting_add);
+
         DummyMeetingGenerator.generateMeetingRoom();
+
 
         Window window = this.getWindow();
         // clear FLAG_TRANSLUCENT_STATUS flag:
@@ -63,6 +65,9 @@ public class MeetingAddActivity extends AppCompatActivity {
         mSubjectMeeting = findViewById(R.id.subject_meeting_add);
         mSpinnerRoom = findViewById(R.id.spinner_room);
         mTVParticipants = findViewById(R.id.tv_participants);
+        mDatePicker = findViewById(R.id.datePicker);
+        mTimePicker = findViewById(R.id.timePicker);
+
 
         //Spinner Meeting Room
         List<MeetingRoom> RoomList = new ArrayList<>();
@@ -80,7 +85,10 @@ public class MeetingAddActivity extends AppCompatActivity {
         mTVParticipants.setAdapter(adapter1);
         mTVParticipants.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
 
-        
+        //Date Picker
+
+
+
         //Close Meeting Add Activity
         mCloseButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,4 +107,11 @@ public class MeetingAddActivity extends AppCompatActivity {
             }
         });
     }
+
+    public void getTheDate(){
+        int day = mDatePicker.getDayOfMonth();
+        int month = (mDatePicker.getMonth()+1);
+        int year = mDatePicker.getYear();
+    }
+
 }
