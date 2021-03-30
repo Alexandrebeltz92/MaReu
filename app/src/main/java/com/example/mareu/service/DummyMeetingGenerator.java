@@ -39,7 +39,6 @@ public abstract class DummyMeetingGenerator {
     public static ArrayList<Employee> participants3 = new ArrayList<>(Arrays.asList(louis, emily, christoph, gregory));
     public static ArrayList<Employee> participantsAll = new ArrayList<>(Arrays.asList(manuel,emily,louis,christoph,gregory,william));
 
-
     public static List<Employee> generateMeetingParticipants() {return  new ArrayList<>(participantsAll);}
 
     //MEETING GENERATOR
@@ -52,7 +51,7 @@ public abstract class DummyMeetingGenerator {
 
     public static List<Meeting> Dummy_Random_Meetings = Arrays.asList(
             new Meeting(1,"Subject",R.drawable.ic_baseline_circle_24,zeusRoom, addDays(Calendar.getInstance().getTime()),participants1),
-            new Meeting(2,"Subject",R.drawable.ic_baseline_circle_24,hadesRoom,addDays(Calendar.getInstance().getTime()),participants1),
+            new Meeting(2,"subject",R.drawable.ic_baseline_circle_24,hadesRoom,addDays(Calendar.getInstance().getTime()),participants1),
             new Meeting(3,"Subject",R.drawable.ic_baseline_circle_24,hermesRoom,addDays(Calendar.getInstance().getTime()),participants2),
             new Meeting(4,"Subject",R.drawable.ic_baseline_circle_24,apolloRoom,addDays(Calendar.getInstance().getTime()),participants3),
             new Meeting(5,"Subject",R.drawable.ic_baseline_circle_24,hadesRoom,addDays(Calendar.getInstance().getTime()),participants2),
@@ -71,5 +70,14 @@ public abstract class DummyMeetingGenerator {
         int days = new Random().nextInt(3);
         d.setTime(d.getTime() + days * 1000L * 60L * 60L * 24L);
         return d;
+    }
+
+    public static Employee getEmployee(String email) {
+        for (Employee e : participantsAll) {
+            if (e.getEmail().equalsIgnoreCase(email)) {
+                return e;
+            }
+        }
+        return null;
     }
 }

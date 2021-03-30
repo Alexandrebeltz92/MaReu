@@ -99,17 +99,40 @@ public class MeetingAddActivity extends AppCompatActivity {
         mAddButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Meeting m = new Meeting(1, mSubjectMeeting.getText().toString(), R.drawable.ic_baseline_circle_24, (MeetingRoom) mSpinnerRoom.getSelectedItem(), addDays(Calendar.getInstance().getTime()), (ArrayList<Employee>) mTVParticipants.getText());
+                String[] emailArray = mTVParticipants.getText().toString().split(", ");
+                Meeting m = new Meeting(1, mSubjectMeeting.getText().toString(), R.drawable.ic_baseline_circle_24, (MeetingRoom) mSpinnerRoom.getSelectedItem(), getTheDate(), getListEmployee(emailArray));
                 meetingApiService.createMeeting(m);
                 finish();
             }
         });
     }
     
-    public void getTheDate(){
+    public Date getTheDate(){
         int day = mDatePicker.getDayOfMonth();
         int month = (mDatePicker.getMonth()+1);
         int year = mDatePicker.getYear();
+
+        int hour = mTimePicker.getCurrentHour();
+        int minute = mTimePicker.getCurrentMinute();
+
+        Calendar   date = Calendar.getInstance();
+        date.set(year, month, day);
+
+        date.set(Calendar.HOUR_OF_DAY, hour);
+        date.set(Calendar.MINUTE, minute);
+
+        return date.getTime();
+    }
+
+    public ArrayList<Employee> getListEmployee(String[] emails){
+        ArrayList<Employee> listEmployee = new ArrayList<>();
+        for (String i : emails) {
+            Employee employee = DummyMeetingGenerator.getEmployee(i);
+            if (employee != null) {
+                listEmployee.add(employee);
+            }
+        }
+        return listEmployee;
     }
 
 }
