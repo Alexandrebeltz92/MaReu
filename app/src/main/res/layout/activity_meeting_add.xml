@@ -50,14 +50,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/logo_meeting_add_activity" />
 
-
     <Spinner
         android:id="@+id/spinner_room"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:background="@android:drawable/editbox_background"
-        android:hint="Select your room."
+        android:hint="Salle de réunion"
         android:padding="16dp"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
@@ -71,7 +70,7 @@
         android:layout_marginTop="24dp"
         android:background="@android:drawable/editbox_background"
         android:completionThreshold="1"
-        android:hint="Select your participants."
+        android:hint="Participants"
         android:padding="16dp"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"

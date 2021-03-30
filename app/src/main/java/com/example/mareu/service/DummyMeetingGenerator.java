@@ -50,20 +50,20 @@ public abstract class DummyMeetingGenerator {
     public static List<Meeting> generateMeetingsRandomList() {return  new ArrayList<>(Dummy_Random_Meetings);}
 
     public static List<Meeting> Dummy_Random_Meetings = Arrays.asList(
-            new Meeting(1,"Subject",R.drawable.ic_baseline_circle_24,zeusRoom, addDays(Calendar.getInstance().getTime()),participants1),
-            new Meeting(2,"subject",R.drawable.ic_baseline_circle_24,hadesRoom,addDays(Calendar.getInstance().getTime()),participants1),
-            new Meeting(3,"Subject",R.drawable.ic_baseline_circle_24,hermesRoom,addDays(Calendar.getInstance().getTime()),participants2),
-            new Meeting(4,"Subject",R.drawable.ic_baseline_circle_24,apolloRoom,addDays(Calendar.getInstance().getTime()),participants3),
-            new Meeting(5,"Subject",R.drawable.ic_baseline_circle_24,hadesRoom,addDays(Calendar.getInstance().getTime()),participants2),
-            new Meeting(6,"Subject",R.drawable.ic_baseline_circle_24,poseidonRoom,addDays(Calendar.getInstance().getTime()),participants3),
-            new Meeting(7,"Subject",R.drawable.ic_baseline_circle_24,zeusRoom,addDays(Calendar.getInstance().getTime()),participants1),
-            new Meeting(8,"Subject",R.drawable.ic_baseline_circle_24,hermesRoom,addDays(Calendar.getInstance().getTime()),participants2),
-            new Meeting(9,"Subject",R.drawable.ic_baseline_circle_24,poseidonRoom,addDays(Calendar.getInstance().getTime()),participants1),
-            new Meeting(10,"Subject",R.drawable.ic_baseline_circle_24,hadesRoom,addDays(Calendar.getInstance().getTime()),participants1),
-            new Meeting(11,"Subject",R.drawable.ic_baseline_circle_24,apolloRoom,addDays(Calendar.getInstance().getTime()),participants2),
-            new Meeting(12,"Subject",R.drawable.ic_baseline_circle_24,poseidonRoom,addDays(Calendar.getInstance().getTime()),participants3),
-            new Meeting(13,"Subject",R.drawable.ic_baseline_circle_24,hermesRoom,addDays(Calendar.getInstance().getTime()),participants1),
-            new Meeting(14,"Subject",R.drawable.ic_baseline_circle_24,zeusRoom,addDays(Calendar.getInstance().getTime()),participants2)
+            new Meeting(getRandomID(),"Subject",R.drawable.ic_baseline_circle_24,zeusRoom, addDays(Calendar.getInstance().getTime()),participants1),
+            new Meeting(getRandomID(),"subject",R.drawable.ic_baseline_circle_24,hadesRoom,addDays(Calendar.getInstance().getTime()),participants1),
+            new Meeting(getRandomID(),"Subject",R.drawable.ic_baseline_circle_24,hermesRoom,addDays(Calendar.getInstance().getTime()),participants2),
+            new Meeting(getRandomID(),"Subject",R.drawable.ic_baseline_circle_24,apolloRoom,addDays(Calendar.getInstance().getTime()),participants3),
+            new Meeting(getRandomID(),"Subject",R.drawable.ic_baseline_circle_24,hadesRoom,addDays(Calendar.getInstance().getTime()),participants2),
+            new Meeting(getRandomID(),"Subject",R.drawable.ic_baseline_circle_24,poseidonRoom,addDays(Calendar.getInstance().getTime()),participants3),
+            new Meeting(getRandomID(),"Subject",R.drawable.ic_baseline_circle_24,zeusRoom,addDays(Calendar.getInstance().getTime()),participants1),
+            new Meeting(getRandomID(),"Subject",R.drawable.ic_baseline_circle_24,hermesRoom,addDays(Calendar.getInstance().getTime()),participants2),
+            new Meeting(getRandomID(),"Subject",R.drawable.ic_baseline_circle_24,poseidonRoom,addDays(Calendar.getInstance().getTime()),participants1),
+            new Meeting(getRandomID(),"Subject",R.drawable.ic_baseline_circle_24,hadesRoom,addDays(Calendar.getInstance().getTime()),participants1),
+            new Meeting(getRandomID(),"Subject",R.drawable.ic_baseline_circle_24,apolloRoom,addDays(Calendar.getInstance().getTime()),participants2),
+            new Meeting(getRandomID(),"Subject",R.drawable.ic_baseline_circle_24,poseidonRoom,addDays(Calendar.getInstance().getTime()),participants3),
+            new Meeting(getRandomID(),"Subject",R.drawable.ic_baseline_circle_24,hermesRoom,addDays(Calendar.getInstance().getTime()),participants1),
+            new Meeting(getRandomID(),"Subject",R.drawable.ic_baseline_circle_24,zeusRoom,addDays(Calendar.getInstance().getTime()),participants2)
     );
 
     public static Date addDays(Date d)  {
@@ -80,4 +80,15 @@ public abstract class DummyMeetingGenerator {
         }
         return null;
     }
+
+    public static int getRandomID() {
+        Random random = new Random();
+        int val = random.nextInt(100);
+        int oldValue = val;
+        if (val == oldValue) {
+            val =+1;
+        } 
+        return  val;
+    }
+
 }
