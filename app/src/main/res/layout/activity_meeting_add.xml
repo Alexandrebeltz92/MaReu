@@ -70,8 +70,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:background="@android:drawable/editbox_background"
-        android:hint="Select your participants."
         android:completionThreshold="1"
+        android:hint="Select your participants."
         android:padding="16dp"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
@@ -80,29 +80,29 @@
 
     <DatePicker
         android:id="@+id/datePicker"
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_width="182dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:background="@android:drawable/editbox_background"
         android:calendarViewShown="false"
         android:datePickerMode="spinner"
         android:padding="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/timePicker"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_participants" />
 
+
     <TimePicker
         android:id="@+id/timePicker"
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_width="197dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:background="@android:drawable/editbox_background"
-        android:timePickerMode="spinner"
         android:padding="16dp"
+        android:timePickerMode="spinner"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/datePicker" />
-
+        app:layout_constraintStart_toEndOf="@+id/datePicker"
+        app:layout_constraintTop_toBottomOf="@+id/tv_participants" />
 
     <ImageButton
         android:id="@+id/add_meeting_button_create"
