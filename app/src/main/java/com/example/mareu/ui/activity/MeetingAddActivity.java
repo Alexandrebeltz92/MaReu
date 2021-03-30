@@ -85,7 +85,8 @@ public class MeetingAddActivity extends AppCompatActivity {
         mTVParticipants.setAdapter(adapter1);
         mTVParticipants.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
 
-        //Date Picker
+        //Date & Time Picker
+        mTimePicker.setIs24HourView(true);
 
         //Close Meeting Add Activity
         mCloseButton.setOnClickListener(new View.OnClickListener() {
