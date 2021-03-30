@@ -16,6 +16,14 @@ public interface MeetingApiService {
     List<Meeting> getMeeting();
 
     /**
+     * Get all my Random Meeting
+     *
+     * @return {@link List}
+     */
+
+    List<Meeting> getRandomMeetingList();
+
+    /**
      * Deletes a meeting
      *
      * @param meeting

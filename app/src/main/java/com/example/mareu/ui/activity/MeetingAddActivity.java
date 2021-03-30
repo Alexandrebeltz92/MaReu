@@ -87,8 +87,6 @@ public class MeetingAddActivity extends AppCompatActivity {
 
         //Date Picker
 
-
-
         //Close Meeting Add Activity
         mCloseButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,7 +105,7 @@ public class MeetingAddActivity extends AppCompatActivity {
             }
         });
     }
-
+    
     public void getTheDate(){
         int day = mDatePicker.getDayOfMonth();
         int month = (mDatePicker.getMonth()+1);

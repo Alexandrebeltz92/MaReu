@@ -48,6 +48,7 @@ public abstract class DummyMeetingGenerator {
     );
 
     static List<Meeting> generateMeetings() { return new ArrayList<>(Dummy_Meetings); }
+    public static List<Meeting> generateMeetingsRandomList() {return  new ArrayList<>(Dummy_Random_Meetings);}
 
     public static List<Meeting> Dummy_Random_Meetings = Arrays.asList(
             new Meeting(1,"Subject",R.drawable.ic_baseline_circle_24,zeusRoom, addDays(Calendar.getInstance().getTime()),participants1),
