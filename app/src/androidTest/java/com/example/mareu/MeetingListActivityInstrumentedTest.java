@@ -50,6 +50,7 @@ public class MeetingListActivityInstrumentedTest {
     /**
      * We ensure that our recyclerview is displaying zero item when we launch the app
      */
+
     @Test
     public void maReuListIsEmptyAtFirst() {
         // First scroll to the position that needs to be matched and click on it.
@@ -84,6 +85,34 @@ public class MeetingListActivityInstrumentedTest {
                         isDisplayed()));
         floatingActionButton2.perform(click());
     }
+
+    /**
+     * We ensure that we open the add activity when we click on the button
+     */
+    @Test
+    public void openAddMeetingActivityWithSuccess() {
+    ViewInteraction floatingActionButton = onView(
+            allOf(withId(R.id.add_meeting), withContentDescription("Add meeting button"),
+                    childAtPosition(
+                            allOf(withId(R.id.activity_meeting_list),
+                                    childAtPosition(
+                                            withId(android.R.id.content),
+                                            0)),
+                            1),
+                    isDisplayed()));
+        floatingActionButton.perform(click());
+
+    ViewInteraction floatingActionButton3 = onView(
+            allOf(withId(R.id.add_random_meeting),
+                    childAtPosition(
+                            allOf(withId(R.id.activity_meeting_list),
+                                    childAtPosition(
+                                            withId(android.R.id.content),
+                                            0)),
+                            2),
+                    isDisplayed()));
+        floatingActionButton3.perform(click());
+}
 
     private static Matcher<View> childAtPosition(
             final Matcher<View> parentMatcher, final int position) {
