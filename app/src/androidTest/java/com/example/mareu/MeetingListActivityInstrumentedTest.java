@@ -103,16 +103,57 @@ public class MeetingListActivityInstrumentedTest {
         floatingActionButton.perform(click());
 
     ViewInteraction floatingActionButton3 = onView(
-            allOf(withId(R.id.add_random_meeting),
+            allOf(withId(R.id.create_meeting),
                     childAtPosition(
                             allOf(withId(R.id.activity_meeting_list),
                                     childAtPosition(
                                             withId(android.R.id.content),
                                             0)),
-                            2),
+                            3),
                     isDisplayed()));
         floatingActionButton3.perform(click());
 }
+
+    /**
+     * We ensure that we can delete a meeting when we click on the delete button
+     */
+
+    @Test
+    public void deleteMeetingWithSuccess() {
+        ViewInteraction floatingActionButton = onView(
+                allOf(withId(R.id.add_meeting), withContentDescription("Add meeting button"),
+                        childAtPosition(
+                                allOf(withId(R.id.activity_meeting_list),
+                                        childAtPosition(
+                                                withId(android.R.id.content),
+                                                0)),
+                                1),
+                        isDisplayed()));
+        floatingActionButton.perform(click());
+
+        ViewInteraction floatingActionButton2 = onView(
+                allOf(withId(R.id.add_random_meeting),
+                        childAtPosition(
+                                allOf(withId(R.id.activity_meeting_list),
+                                        childAtPosition(
+                                                withId(android.R.id.content),
+                                                0)),
+                                2),
+                        isDisplayed()));
+        floatingActionButton2.perform(click());
+
+        ViewInteraction appCompatImageButton = onView(
+                allOf(withId(R.id.item_list_delete_button), withContentDescription("Delete Button"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withClassName(is("androidx.cardview.widget.CardView")),
+                                        0),
+                                7),
+                        isDisplayed()));
+        appCompatImageButton.perform(click());
+
+    }
+
 
     private static Matcher<View> childAtPosition(
             final Matcher<View> parentMatcher, final int position) {
