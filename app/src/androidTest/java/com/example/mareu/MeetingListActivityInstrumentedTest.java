@@ -25,6 +25,8 @@ import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.replaceText;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.ViewMatchers.hasMinimumChildCount;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
 import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
@@ -40,10 +42,23 @@ import static org.junit.Assert.*;
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
 @RunWith(AndroidJUnit4.class)
-public class ExampleInstrumentedTest {
+public class MeetingListActivityInstrumentedTest {
 
     @Rule
-    public ActivityTestRule<MeetingListActivity> mActivityTestRule = new ActivityTestRule<>(MeetingListActivity.class);
+    public ActivityTestRule<MeetingListActivity> mActivityRule = new ActivityTestRule<>(MeetingListActivity.class);
+
+    /**
+     * We ensure that our recyclerview is displaying zero item when we launch the app
+     */
+    @Test
+    public void maReuListIsEmptyAtFirst() {
+        // First scroll to the position that needs to be matched and click on it.
+        onView(withId(R.id.activity_meeting_list)).check(matches(hasMinimumChildCount(0)));
+    }
+
+    /**
+     * We ensure that the button add meeting create a random meeting
+     */
 
     @Test
     public void addMeetingRandomWithSuccess() {
