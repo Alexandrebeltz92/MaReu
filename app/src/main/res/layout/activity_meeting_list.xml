@@ -62,7 +62,6 @@
         app:fabSize="mini"
         android:visibility="gone"
         android:backgroundTint="@color/toolbar"
-        android:onClick="ShowPopUpCreateMeeeting"
         app:layout_constraintBottom_toTopOf="@+id/add_random_meeting"
         app:layout_constraintEnd_toEndOf="@+id/add_random_meeting"
         app:srcCompat="@drawable/ic_baseline_create_24" />
