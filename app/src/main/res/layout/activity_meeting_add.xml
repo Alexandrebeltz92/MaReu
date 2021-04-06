@@ -17,8 +17,8 @@
         android:layout_width="55dp"
         android:layout_height="55dp"
         android:layout_marginTop="24dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_baseline_groups_24"
         app:tint="@color/toolbar" />
@@ -31,7 +31,7 @@
         android:layout_marginEnd="12dp"
         android:background="@null"
         android:tint="@color/toolbar_dark"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_baseline_close_24" />
 
@@ -46,8 +46,8 @@
         android:inputType="textPersonName"
         android:padding="16dp"
         android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/logo_meeting_add_activity" />
 
     <Spinner
@@ -59,8 +59,8 @@
         android:hint="Salle de réunion"
         android:padding="16dp"
         android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/subject_meeting_add" />
 
     <MultiAutoCompleteTextView
@@ -73,8 +73,8 @@
         android:hint="Participants"
         android:padding="16dp"
         android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinner_room" />
 
     <DatePicker
