@@ -159,7 +159,7 @@ public class MeetingListActivityInstrumentedTest {
     }
 
     @Test
-    public void filerLocalisationWithSucess() {
+    public void cancelCreateNewMeetingWithSuccess() {
         ViewInteraction floatingActionButton = onView(
                 allOf(withId(R.id.add_meeting), withContentDescription("Add meeting button"),
                         childAtPosition(
@@ -172,52 +172,26 @@ public class MeetingListActivityInstrumentedTest {
         floatingActionButton.perform(click());
 
         ViewInteraction floatingActionButton2 = onView(
-                allOf(withId(R.id.add_random_meeting),
+                allOf(withId(R.id.create_meeting),
                         childAtPosition(
                                 allOf(withId(R.id.activity_meeting_list),
                                         childAtPosition(
                                                 withId(android.R.id.content),
                                                 0)),
-                                2),
+                                3),
                         isDisplayed()));
         floatingActionButton2.perform(click());
 
-        ViewInteraction actionMenuItemView = onView(
-                allOf(withId(R.id.filter), withContentDescription("Filter"),
+        ViewInteraction appCompatImageButton = onView(
+                allOf(withId(R.id.imageButtonClose),
                         childAtPosition(
-                                childAtPosition(
-                                        withId(R.id.my_toolbar),
-                                        1),
-                                0),
+                                allOf(withId(R.id.activity_meeting_list),
+                                        childAtPosition(
+                                                withId(android.R.id.content),
+                                                0)),
+                                1),
                         isDisplayed()));
-        actionMenuItemView.perform(click());
-
-        ViewInteraction appCompatTextView = onView(
-                allOf(withId(R.id.title), withText("Localisation"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(R.id.content),
-                                        0),
-                                0),
-                        isDisplayed()));
-        appCompatTextView.perform(click());
-
-        DataInteraction appCompatCheckedTextView = onData(anything())
-                .inAdapterView(allOf(withId(R.id.select_dialog_listview),
-                        childAtPosition(
-                                withId(R.id.contentPanel),
-                                0)))
-                .atPosition(4);
-        appCompatCheckedTextView.perform(click());
-
-        ViewInteraction appCompatButton = onView(
-                allOf(withId(android.R.id.button1), withText("OK"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(R.id.buttonPanel),
-                                        0),
-                                3)));
-        appCompatButton.perform(scrollTo(), click());
+        appCompatImageButton.perform(click());
     }
 
 
