@@ -27,6 +27,7 @@ import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.replaceText;
+import static androidx.test.espresso.action.ViewActions.scrollTo;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.hasMinimumChildCount;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
@@ -155,6 +156,68 @@ public class MeetingListActivityInstrumentedTest {
                         isDisplayed()));
         appCompatImageButton.perform(click());
 
+    }
+
+    @Test
+    public void filerLocalisationWithSucess() {
+        ViewInteraction floatingActionButton = onView(
+                allOf(withId(R.id.add_meeting), withContentDescription("Add meeting button"),
+                        childAtPosition(
+                                allOf(withId(R.id.activity_meeting_list),
+                                        childAtPosition(
+                                                withId(android.R.id.content),
+                                                0)),
+                                1),
+                        isDisplayed()));
+        floatingActionButton.perform(click());
+
+        ViewInteraction floatingActionButton2 = onView(
+                allOf(withId(R.id.add_random_meeting),
+                        childAtPosition(
+                                allOf(withId(R.id.activity_meeting_list),
+                                        childAtPosition(
+                                                withId(android.R.id.content),
+                                                0)),
+                                2),
+                        isDisplayed()));
+        floatingActionButton2.perform(click());
+
+        ViewInteraction actionMenuItemView = onView(
+                allOf(withId(R.id.filter), withContentDescription("Filter"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(R.id.my_toolbar),
+                                        1),
+                                0),
+                        isDisplayed()));
+        actionMenuItemView.perform(click());
+
+        ViewInteraction appCompatTextView = onView(
+                allOf(withId(R.id.title), withText("Localisation"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(R.id.content),
+                                        0),
+                                0),
+                        isDisplayed()));
+        appCompatTextView.perform(click());
+
+        DataInteraction appCompatCheckedTextView = onData(anything())
+                .inAdapterView(allOf(withId(R.id.select_dialog_listview),
+                        childAtPosition(
+                                withId(R.id.contentPanel),
+                                0)))
+                .atPosition(4);
+        appCompatCheckedTextView.perform(click());
+
+        ViewInteraction appCompatButton = onView(
+                allOf(withId(android.R.id.button1), withText("OK"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(R.id.buttonPanel),
+                                        0),
+                                3)));
+        appCompatButton.perform(scrollTo(), click());
     }
 
 

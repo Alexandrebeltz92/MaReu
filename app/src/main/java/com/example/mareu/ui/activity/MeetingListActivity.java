@@ -108,7 +108,6 @@ public class MeetingListActivity extends AppCompatActivity {
         });
     }
 
-    //
     @Override
     protected void onResume() {
         super.onResume();
