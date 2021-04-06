@@ -27,7 +27,7 @@ public class MeetingServiceUnitTest {
     }
 
     @Test
-    public void getMeetingWithSucess() {
+    public void getMeetingWithSuccess() {
         List<Meeting> meetings = service.getRandomMeetingList();
         List<Meeting> expectedMeetings = DummyMeetingGenerator.Dummy_Random_Meetings;
         assertThat(meetings, IsIterableContainingInAnyOrder.containsInAnyOrder(expectedMeetings.toArray()));

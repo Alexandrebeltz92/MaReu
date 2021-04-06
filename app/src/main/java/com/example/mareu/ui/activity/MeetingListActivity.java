@@ -130,16 +130,16 @@ public class MeetingListActivity extends AppCompatActivity {
 
         if (id == R.id.localisation_filter) {
             filterRoomDialog();
-            Toast.makeText(getApplicationContext(), "Choose your rooms.", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Filtrez par salle.", Toast.LENGTH_LONG).show();
         }
         if (id == R.id.date_filter) {
             filterDateDialog();
-            Toast.makeText(getApplicationContext(), "Date Filter", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Filtrez par date", Toast.LENGTH_LONG).show();
         }
 
         if (id == R.id.all_filter) {
             ((MyRecyclerViewAdapter) mRecyclerView.getAdapter()).filterDate(null);
-            Toast.makeText(getApplicationContext(), "afficher tout", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Afficher tout", Toast.LENGTH_LONG).show();
         }
 
         return super.onOptionsItemSelected(item);

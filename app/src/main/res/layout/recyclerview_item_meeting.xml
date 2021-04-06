@@ -90,7 +90,7 @@
 
             <TextView
                 android:id="@+id/localisation_meeting"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="4dp"
@@ -98,13 +98,16 @@
                 android:contentDescription="@string/localisation_meeting"
                 android:text="@string/localisation_meeting"
                 android:textStyle="bold"
+                android:ellipsize="end"
+                android:maxLines="1"
+                app:layout_constraintRight_toLeftOf="@+id/item_list_delete_button"
                 app:layout_constraintBottom_toTopOf="@id/participant_meeting"
                 app:layout_constraintLeft_toRightOf="@id/divider2"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/participant_meeting"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="9dp"
                 android:contentDescription="@string/participants_meeting"
