@@ -200,51 +200,11 @@ public class MeetingListActivityInstrumentedTest {
     }
 
     @Test
-    public void createNewMeetingWithSuccess() {
-        ViewInteraction floatingActionButton = onView(
-                allOf(withId(R.id.add_meeting), withContentDescription("Add meeting button"),
-                        childAtPosition(
-                                allOf(withId(R.id.activity_meeting_list),
-                                        childAtPosition(
-                                                withId(android.R.id.content),
-                                                0)),
-                                1),
-                        isDisplayed()));
-        floatingActionButton.perform(click());
-
-        ViewInteraction floatingActionButton2 = onView(
-                allOf(withId(R.id.create_meeting),
-                        childAtPosition(
-                                allOf(withId(R.id.activity_meeting_list),
-                                        childAtPosition(
-                                                withId(android.R.id.content),
-                                                0)),
-                                3),
-                        isDisplayed()));
-        floatingActionButton2.perform(click());
-
-        ViewInteraction appCompatEditText = onView(
-                allOf(withId(R.id.subject_meeting_add),
-                        childAtPosition(
-                                allOf(withId(R.id.activity_meeting_list),
-                                        childAtPosition(
-                                                withId(android.R.id.content),
-                                                0)),
-                                2),
-                        isDisplayed()));
-        appCompatEditText.perform(replaceText("sujet"), closeSoftKeyboard());
-
-        ViewInteraction appCompatSpinner = onView(
-                allOf(withId(R.id.spinner_room),
-                        childAtPosition(
-                                allOf(withId(R.id.activity_meeting_list),
-                                        childAtPosition(
-                                                withId(android.R.id.content),
-                                                0)),
-                                3),
-                        isDisplayed()));
-        appCompatSpinner.perform(click());
-
+    public void createNewMeeting() {
+        onView(withId(R.id.add_meeting)).perform(click());
+        onView(withId(R.id.create_meeting)).perform(click());
+        onView(withId(R.id.subject_meeting_add)).perform(replaceText("sujet"), closeSoftKeyboard());
+        onView(withId(R.id.spinner_room)).perform(click());
         DataInteraction appCompatCheckedTextView = onData(anything())
                 .inAdapterView(childAtPosition(
                         withClassName(is("android.widget.PopupWindow$PopupBackgroundView")),
@@ -252,34 +212,7 @@ public class MeetingListActivityInstrumentedTest {
                 .atPosition(2);
         appCompatCheckedTextView.perform(click());
 
-        ViewInteraction appCompatMultiAutoCompleteTextView = onView(
-                allOf(withId(R.id.tv_participants),
-                        childAtPosition(
-                                allOf(withId(R.id.activity_meeting_list),
-                                        childAtPosition(
-                                                withId(android.R.id.content),
-                                                0)),
-                                4),
-                        isDisplayed()));
-        appCompatMultiAutoCompleteTextView.perform(replaceText("em"), closeSoftKeyboard());
-
-        DataInteraction appCompatTextView = onData(anything())
-                .inAdapterView(childAtPosition(
-                        withClassName(is("android.widget.PopupWindow$PopupBackgroundView")),
-                        0))
-                .atPosition(0);
-        appCompatTextView.perform(click());
-
-        ViewInteraction appCompatMultiAutoCompleteTextView2 = onView(
-                allOf(withId(R.id.tv_participants), withText("em"),
-                        childAtPosition(
-                                allOf(withId(R.id.activity_meeting_list),
-                                        childAtPosition(
-                                                withId(android.R.id.content),
-                                                0)),
-                                4),
-                        isDisplayed()));
-        appCompatMultiAutoCompleteTextView2.perform(replaceText("emily@gmail.com, "));
+        onView(withId(R.id.tv_participants)).perform(replaceText("emily@gmail.com, "), closeSoftKeyboard());
 
         ViewInteraction appCompatMultiAutoCompleteTextView3 = onView(
                 allOf(withId(R.id.tv_participants), withText("emily@gmail.com, "),
@@ -307,8 +240,8 @@ public class MeetingListActivityInstrumentedTest {
                                 7),
                         isDisplayed()));
         appCompatImageButton.perform(click());
+        
     }
-
 
     private static Matcher<View> childAtPosition(
             final Matcher<View> parentMatcher, final int position) {
