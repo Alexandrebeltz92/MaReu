@@ -243,7 +243,7 @@ public class MeetingListActivityInstrumentedTest {
     }
 
     @Test
-    public void checkFilterRoom() {
+    public void checkFilterRoomWithSuccess() {
         onView(withId(R.id.add_meeting)).perform(click());
         onView(withId(R.id.create_meeting)).perform(click());
         onView(withId(R.id.subject_meeting_add)).perform(replaceText("sujet"), closeSoftKeyboard());
