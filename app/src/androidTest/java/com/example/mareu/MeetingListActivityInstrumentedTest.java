@@ -242,6 +242,77 @@ public class MeetingListActivityInstrumentedTest {
         appCompatImageButton.perform(click());
     }
 
+    @Test
+    public void checkFilterRoom() {
+        onView(withId(R.id.add_meeting)).perform(click());
+        onView(withId(R.id.create_meeting)).perform(click());
+        onView(withId(R.id.subject_meeting_add)).perform(replaceText("sujet"), closeSoftKeyboard());
+        onView(withId(R.id.spinner_room)).perform(click());
+        DataInteraction appCompatCheckedTextView = onData(anything())
+                .inAdapterView(childAtPosition(
+                        withClassName(is("android.widget.PopupWindow$PopupBackgroundView")),
+                        0))
+                .atPosition(2);
+        appCompatCheckedTextView.perform(click());
+
+        onView(withId(R.id.tv_participants)).perform(replaceText("emily@gmail.com, "), closeSoftKeyboard());
+
+        ViewInteraction appCompatMultiAutoCompleteTextView3 = onView(
+                allOf(withId(R.id.tv_participants), withText("emily@gmail.com, "),
+                        childAtPosition(
+                                allOf(withId(R.id.activity_meeting_list),
+                                        childAtPosition(
+                                                withId(android.R.id.content),
+                                                0)),
+                                4),
+                        isDisplayed()));
+        appCompatMultiAutoCompleteTextView3.perform(closeSoftKeyboard());
+
+        onView(withId(R.id.datePicker))
+                .perform(new GeneralClickAction(Tap.SINGLE, GeneralLocation.TOP_CENTER, Press.FINGER, 1, 0));
+        onView(withId(R.id.timePicker))
+                .perform(new GeneralClickAction(Tap.SINGLE, GeneralLocation.TOP_CENTER, Press.FINGER, 1, 0));
+
+        ViewInteraction appCompatImageButton = onView(
+                allOf(withId(R.id.add_meeting_button_create),
+                        childAtPosition(
+                                allOf(withId(R.id.activity_meeting_list),
+                                        childAtPosition(
+                                                withId(android.R.id.content),
+                                                0)),
+                                7),
+                        isDisplayed()));
+        appCompatImageButton.perform(click());
+
+        onView(withId(R.id.filter)).perform(click());
+        ViewInteraction appCompatTextView = onView(
+                allOf(withId(R.id.title), withText("Localisation"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(R.id.content),
+                                        0),
+                                0),
+                        isDisplayed()));
+        appCompatTextView.perform(click());
+
+        DataInteraction selectRoom = onData(anything())
+                .inAdapterView(allOf(withId(R.id.select_dialog_listview),
+                        childAtPosition(
+                                withId(R.id.contentPanel),
+                                0)))
+                .atPosition(2);
+        selectRoom.perform(click());
+
+        ViewInteraction appCompatButton = onView(
+                allOf(withId(android.R.id.button1), withText("OK"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(R.id.buttonPanel),
+                                        0),
+                                3)));
+        appCompatButton.perform(scrollTo(), click());
+    }
+
     private static Matcher<View> childAtPosition(
             final Matcher<View> parentMatcher, final int position) {
 
