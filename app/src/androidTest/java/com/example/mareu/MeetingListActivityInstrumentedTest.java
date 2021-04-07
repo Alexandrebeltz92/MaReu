@@ -200,7 +200,7 @@ public class MeetingListActivityInstrumentedTest {
     }
 
     @Test
-    public void createNewMeeting() {
+    public void createNewMeetingWithSuccess() {
         onView(withId(R.id.add_meeting)).perform(click());
         onView(withId(R.id.create_meeting)).perform(click());
         onView(withId(R.id.subject_meeting_add)).perform(replaceText("sujet"), closeSoftKeyboard());
@@ -240,7 +240,6 @@ public class MeetingListActivityInstrumentedTest {
                                 7),
                         isDisplayed()));
         appCompatImageButton.perform(click());
-        
     }
 
     private static Matcher<View> childAtPosition(
