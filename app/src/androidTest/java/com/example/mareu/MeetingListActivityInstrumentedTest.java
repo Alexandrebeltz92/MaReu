@@ -61,7 +61,7 @@ public class MeetingListActivityInstrumentedTest {
      */
 
     @Test
-    public void maReuListIsEmptyAtFirst() {
+    public void meetingListIsEmptyAtFirst() {
         // First scroll to the position that needs to be matched and click on it.
         onView(withId(R.id.activity_meeting_list)).check(matches(hasMinimumChildCount(0)));
     }
