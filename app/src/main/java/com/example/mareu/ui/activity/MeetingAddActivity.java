@@ -107,16 +107,16 @@ public class MeetingAddActivity extends AppCompatActivity {
             }
         });
     }
-    
-    public Date getTheDate(){
+
+    public Date getTheDate() {
         int day = mDatePicker.getDayOfMonth();
-        int month = (mDatePicker.getMonth()+1);
+        int month = (mDatePicker.getMonth() + 1);
         int year = mDatePicker.getYear();
 
         int hour = mTimePicker.getCurrentHour();
         int minute = mTimePicker.getCurrentMinute();
 
-        Calendar   date = Calendar.getInstance();
+        Calendar date = Calendar.getInstance();
         date.set(year, month, day);
 
         date.set(Calendar.HOUR_OF_DAY, hour);
@@ -125,7 +125,7 @@ public class MeetingAddActivity extends AppCompatActivity {
         return date.getTime();
     }
 
-    public ArrayList<Employee> getListEmployee(String[] emails){
+    public ArrayList<Employee> getListEmployee(String[] emails) {
         ArrayList<Employee> listEmployee = new ArrayList<>();
         for (String i : emails) {
             Employee employee = DummyMeetingGenerator.getEmployee(i);

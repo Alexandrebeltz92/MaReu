@@ -53,7 +53,9 @@ public class Meeting {
         this.participants = participants;
     }
 
-    /** Setter and getter */
+    /**
+     * Setter and getter
+     */
 
     public long getId() {
         return id;

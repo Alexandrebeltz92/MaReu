@@ -24,7 +24,7 @@ import java.util.Locale;
 public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.MyViewHolder> {
 
     private List<Meeting> mMeeting;
-    private List<Meeting> filterList ;
+    private List<Meeting> filterList;
     SimpleDateFormat sdf = new SimpleDateFormat("hh:mm", Locale.FRANCE);
 
     public MyRecyclerViewAdapter(List<Meeting> items) {
@@ -57,8 +57,8 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     private String addText(ArrayList<Employee> participants) {
         StringBuilder text = new StringBuilder();
         text.append(participants.get(0).getEmail());
-        for (int i=1; i<participants.size(); i++) {
-            text.append(", "+participants.get(i).getEmail());
+        for (int i = 1; i < participants.size(); i++) {
+            text.append(", " + participants.get(i).getEmail());
         }
         return text.toString();
     }
@@ -73,13 +73,13 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
             case 1:
                 holder.mAvatar.setColorFilter(ContextCompat.getColor(holder.itemView.getContext(), R.color.ZeusRoom), android.graphics.PorterDuff.Mode.MULTIPLY);
                 break;
-            case 2 :
+            case 2:
                 holder.mAvatar.setColorFilter(ContextCompat.getColor(holder.itemView.getContext(), R.color.HadesRoom), android.graphics.PorterDuff.Mode.MULTIPLY);
                 break;
             case 3:
                 holder.mAvatar.setColorFilter(ContextCompat.getColor(holder.itemView.getContext(), R.color.HermesRoom), android.graphics.PorterDuff.Mode.MULTIPLY);
                 break;
-            case 4 :
+            case 4:
                 holder.mAvatar.setColorFilter(ContextCompat.getColor(holder.itemView.getContext(), R.color.ApolloRoom), android.graphics.PorterDuff.Mode.MULTIPLY);
                 break;
             case 5:
@@ -116,10 +116,10 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         void OnItemClicked(Meeting meeting);
     }
 
-    public void filterRoom(ArrayList<String> rooms ) {
-        if (rooms == null || rooms.isEmpty()){
+    public void filterRoom(ArrayList<String> rooms) {
+        if (rooms == null || rooms.isEmpty()) {
             filterList = mMeeting;
-        }else {
+        } else {
             ArrayList<Meeting> resultList = new ArrayList<>();
             for (String room : rooms) {
                 for (Meeting meeting : mMeeting) {
