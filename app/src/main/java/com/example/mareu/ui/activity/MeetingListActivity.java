@@ -29,8 +29,10 @@ import com.example.mareu.ui.adapter.MyRecyclerViewAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Locale;
 
 public class MeetingListActivity extends AppCompatActivity {
 
@@ -40,6 +42,7 @@ public class MeetingListActivity extends AppCompatActivity {
     FloatingActionButton mFabRandomMeeting;
     FloatingActionButton mFabCreateMeeting;
     MeetingApiService meetingApiService;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,10 +72,17 @@ public class MeetingListActivity extends AppCompatActivity {
 
         myRecyclerViewAdapter.setListener(new MyRecyclerViewAdapter.ItemClickListener() {
             @Override
-            public void OnItemClicked(Meeting meeting) {
+            public void onItemClicked(Meeting meeting) {
                 meetingApiService.deleteMeeting(meeting);
                 mRecyclerView.getAdapter().notifyDataSetChanged();
                 Snackbar.make(mRecyclerView, "Reunion supprimée : " + meeting.getSubject(), Snackbar.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onMeetingLongClicked(Meeting meeting) {
+                SimpleDateFormat fd = new SimpleDateFormat("dd/MM/yyyy hh:mm", Locale.FRANCE);
+                String date = fd.format(meeting.getDate());
+                Snackbar.make(mRecyclerView, date, Snackbar.LENGTH_LONG).show();
             }
         });
 

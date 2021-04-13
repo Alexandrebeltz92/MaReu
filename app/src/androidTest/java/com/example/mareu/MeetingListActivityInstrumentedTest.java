@@ -1,10 +1,9 @@
 package com.example.mareu;
 
-import android.content.Context;
+
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
-import android.widget.DatePicker;
 
 import androidx.test.espresso.DataInteraction;
 import androidx.test.espresso.ViewInteraction;
@@ -12,17 +11,15 @@ import androidx.test.espresso.action.GeneralClickAction;
 import androidx.test.espresso.action.GeneralLocation;
 import androidx.test.espresso.action.Press;
 import androidx.test.espresso.action.Tap;
-import androidx.test.platform.app.InstrumentationRegistry;
+
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.rule.ActivityTestRule;
-
 import com.example.mareu.ui.activity.MeetingListActivity;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
-import org.hamcrest.Matchers;
 import org.hamcrest.TypeSafeMatcher;
-import org.hamcrest.core.AllOf;
+
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -43,7 +40,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.anything;
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.*;
+
 
 /**
  * Instrumented test, which will execute on an Android device.
@@ -100,28 +97,28 @@ public class MeetingListActivityInstrumentedTest {
      */
     @Test
     public void openAddMeetingActivityWithSuccess() {
-    ViewInteraction floatingActionButton = onView(
-            allOf(withId(R.id.add_meeting), withContentDescription("Add meeting button"),
-                    childAtPosition(
-                            allOf(withId(R.id.activity_meeting_list),
-                                    childAtPosition(
-                                            withId(android.R.id.content),
-                                            0)),
-                            1),
-                    isDisplayed()));
+        ViewInteraction floatingActionButton = onView(
+                allOf(withId(R.id.add_meeting), withContentDescription("Add meeting button"),
+                        childAtPosition(
+                                allOf(withId(R.id.activity_meeting_list),
+                                        childAtPosition(
+                                                withId(android.R.id.content),
+                                                0)),
+                                1),
+                        isDisplayed()));
         floatingActionButton.perform(click());
 
-    ViewInteraction floatingActionButton3 = onView(
-            allOf(withId(R.id.create_meeting),
-                    childAtPosition(
-                            allOf(withId(R.id.activity_meeting_list),
-                                    childAtPosition(
-                                            withId(android.R.id.content),
-                                            0)),
-                            3),
-                    isDisplayed()));
+        ViewInteraction floatingActionButton3 = onView(
+                allOf(withId(R.id.create_meeting),
+                        childAtPosition(
+                                allOf(withId(R.id.activity_meeting_list),
+                                        childAtPosition(
+                                                withId(android.R.id.content),
+                                                0)),
+                                3),
+                        isDisplayed()));
         floatingActionButton3.perform(click());
-}
+    }
 
     /**
      * We ensure that we can delete a meeting when we click on the delete button

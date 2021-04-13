@@ -70,6 +70,8 @@
                 android:contentDescription="@string/subject_meeting"
                 android:text="@string/date_meeting"
                 android:textStyle="bold"
+                android:focusable="true"
+                android:clickable="true"
                 app:layout_constraintBottom_toTopOf="@id/participant_meeting"
                 app:layout_constraintLeft_toRightOf="@id/divider1"
                 app:layout_constraintTop_toTopOf="parent" />
